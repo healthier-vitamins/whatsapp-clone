@@ -1,8 +1,8 @@
 {
-  "name": "bmc-backend",
+  "name": "lib",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/healthier-vitamins/bmc-backend.git",
+  "repository": "https://github.com/healthier-vitamins/bmc-frontend.git",
   "author": "healthy-vitamins <cheeaudrian97@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
