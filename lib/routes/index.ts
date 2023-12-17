@@ -1,5 +1,3 @@
 import { Application } from "express";
 
-export default function initialiseAllRoutes(app: Application) {
-  // app.use("/api");
-}
+export default function setupRoutes(app: Application) {}

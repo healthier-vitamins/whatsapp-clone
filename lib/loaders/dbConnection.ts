@@ -17,4 +17,5 @@ function pingDb() {
     });
   }
 }
+
 export default pingDb;
