@@ -7,7 +7,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "concurrently": "^8.2.2"
   }

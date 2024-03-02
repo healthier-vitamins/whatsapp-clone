@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": "https://github.com/healthier-vitamins/bmc-frontend.git",
   "author": "healthy-vitamins <cheeaudrian97@gmail.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "dev": "nodemon index.ts"
   },
@@ -17,12 +17,12 @@
     "helmet": "^7.0.0",
     "http-status-codes": "^2.3.0",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.6.5",
-    "nodemon": "^3.0.1",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+    "mysql2": "^3.6.5"
   },
   "devDependencies": {
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2",
     "@types/compression": "^1.7.4",
     "@types/cors": "^2.8.15",
     "@types/express": "^4.17.20",

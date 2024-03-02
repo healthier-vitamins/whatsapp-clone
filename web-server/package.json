@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": "https://github.com/healthier-vitamins/bmc-frontend.git",
   "author": "healthy-vitamins <cheeaudrian97@gmail.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "axios": "^1.6.0",
     "dotenv": "^16.3.1",
@@ -16,7 +16,9 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "ts-loader": "^9.5.0",
-    "typescript": "^5.2.2",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
