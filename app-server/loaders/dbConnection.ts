@@ -3,19 +3,21 @@ import mysql from 'mysql2'
 require('dotenv').config()
 
 function pingDb() {
-    const databaseUrl = process.env.DATABASE_URL
-    if (databaseUrl) {
-        let dbConnection = mysql.createConnection(databaseUrl)
+    let dbConnection = mysql.createConnection({
+        host: 'localhost',
+        user: 'audrian',
+        password: 'STRONGpassword123',
+        database: 'whatsapp'
+    })
 
-        dbConnection.connect((err) => {
-            if (err) {
-                console.error('Error connecting to the database:', err)
-            } else {
-                console.log('Connected to PlanetScale!')
-                dbConnection.end()
-            }
-        })
-    }
+    dbConnection.connect((err) => {
+        if (err) {
+            console.error('Error connecting to the database:', err)
+        } else {
+            console.log('Connected to DB')
+            dbConnection.end()
+        }
+    })
 }
 
 export default pingDb

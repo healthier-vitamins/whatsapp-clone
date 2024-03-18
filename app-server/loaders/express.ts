@@ -17,9 +17,7 @@ function configureExpress() {
     app.use(helmet())
     app.disable('x-powered-by')
 
-    // ===================================================
     // security headers
-    // ===================================================
     app.use((req, res, next) => {
         res.setHeader('X-Content-Type-Options', 'nosniff')
         res.setHeader('X-Frame-Options', 'SAMEORIGIN')
@@ -28,7 +26,7 @@ function configureExpress() {
 
     setupRoutes(app)
 
-    // Reject unregistered routes
+    // reject unregistered routes
     app.all('*', (req, res) => {
         res.status(StatusCodes.NOT_FOUND).json({
             error: ERROR_MESSAGES.INVALID_ROUTE
