@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const webpack = require('webpack')
 const dotenv = require('dotenv')
-const buildPath = resolve(__dirname, 'build')
 const path = require('path')
 const fs = require('fs')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -16,25 +15,25 @@ const envKeys = Object.keys(env).reduce((accumulator, element) => {
 module.exports = {
     entry: './src/index.tsx',
     output: {
-        path: buildPath,
+        path: resolve(__dirname, 'dist'),
         filename: 'bundle.[fullhash].js',
         publicPath: '/'
     },
     resolve: {
-        modules: [
-            resolve('./src'),
-            resolve('./node_modules')
-            // join(__dirname, 'js/helpers')
-        ],
+        modules: [resolve('./src'), resolve('./node_modules')],
         extensions: ['.js', '.jsx', '.css', '.scss', '.ts', '.tsx', '.json']
     },
 
     plugins: [
         new CleanWebpackPlugin({
-            cleanAfterEveryBuildPatterns: ['build']
+            cleanAfterEveryBuildPatterns: [
+                '**/*',
+                path.join(process.cwd(), 'build/**/*')
+            ]
         }),
         new webpack.DefinePlugin(envKeys),
         new HtmlWebpackPlugin({
+            filename: 'index.html',
             template: './src/index.html'
         }),
 
@@ -50,7 +49,7 @@ module.exports = {
         })
     ],
     optimization: {
-        // only removes the unused exports in production, not in development
+        // tree shaking
         usedExports: true
     },
     module: {
@@ -63,9 +62,12 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
+                options: {
+                    // this is selected by default, here for informational purposes
+                    configFile: path.resolve(__dirname, './babel.config.json')
+                },
                 exclude: /node_modules/
             },
-
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
