@@ -1,10 +1,9 @@
-const { resolve, join } = require('path')
+const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const webpack = require('webpack')
 const dotenv = require('dotenv')
 const path = require('path')
-const fs = require('fs')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const env = dotenv.config().parsed
@@ -78,14 +77,19 @@ module.exports = {
                         }
                     },
                     'css-loader',
-                    // this is needed for sass relative path handling
-                    'resolve-url-loader',
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    }
+                    //? for sass (however tailwind does not like sass)
+                    //* this is needed for sass relative path handling
+                    // 'resolve-url-loader'
+                    // {
+                    //     loader: 'sass-loader',
+                    //     options: {
+                    //         sourceMap: true
+                    //     }
+                    // }
+
+                    //? tailwind setup
+                    // https://gist.github.com/bradtraversy/1c93938c1fe4f10d1e5b0532ae22e16a
+                    'postcss-loader'
                 ]
             },
             {

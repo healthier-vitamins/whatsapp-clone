@@ -1,4 +1,3 @@
-import './styles/main.scss'
 import { createRoot } from 'react-dom/client'
 import {
     Outlet,
@@ -8,6 +7,10 @@ import {
     createRoutesFromElements
 } from 'react-router-dom'
 import ErrorPage from './pages/errors/ErrorPage'
+import './styles/main.css'
+
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -28,4 +31,8 @@ export const router = createBrowserRouter(
 // https://react.dev/blog/2022/03/08/react-18-upgrade-guide
 const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
-root.render(<RouterProvider router={router} />)
+root.render(
+    <Provider store={store}>
+        <RouterProvider router={router} />
+    </Provider>
+)
