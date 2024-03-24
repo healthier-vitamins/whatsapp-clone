@@ -39,13 +39,13 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'bundle.[fullhash].css',
             chunkFilename: 'bundle.[fullhash].css'
-        }),
+        })
         // new webpack.ProvidePlugin({
         //     Buffer: ['buffer', 'Buffer']
         // }),
-        new webpack.ProvidePlugin({
-            process: 'process/browser'
-        })
+        // new webpack.ProvidePlugin({
+        //     process: 'process/browser'
+        // })
     ],
     optimization: {
         // tree shaking
