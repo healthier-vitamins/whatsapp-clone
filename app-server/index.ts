@@ -30,8 +30,6 @@ process
 const portList = process.env.PORTS?.split(';;') || []
 const serverInstances = <any>[]
 
-console.log(portList)
-
 portList.forEach((port) => {
     const webServer = http.createServer(expressApp)
 
