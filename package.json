@@ -6,7 +6,10 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "frontend": "cd web-server && npm run dev",
         "backend": "cd app-server && npm run dev",
-        "start": "concurrently --kill-others-on-fail \"npm run frontend\" \"npm run backend\""
+        "install:frontend": "cd web-server && npm install",
+        "install:backend": "cd app-server && npm install",
+        "start": "concurrently --kill-others-on-fail \"npm run frontend\" \"npm run backend\"",
+        "install": "concurrently --kill-others-on-fail \"npm run install:backend\" \"npm run install:frontend\""
     },
     "keywords": [],
     "author": "",

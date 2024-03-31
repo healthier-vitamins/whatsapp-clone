@@ -3,5 +3,6 @@
     "css.lint.unknownAtRules": "ignore",
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit"
-    }
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

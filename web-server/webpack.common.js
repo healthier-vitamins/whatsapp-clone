@@ -5,11 +5,9 @@ const webpack = require('webpack')
 const dotenv = require('dotenv')
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const process = require('process')
 
-const env = dotenv.config().parsed
-const envKeys = Object.keys(env).reduce((accumulator, element) => {
-    accumulator[`process.env.${element}`] = JSON.stringify(env[element])
-}, {})
+dotenv.config()
 
 module.exports = {
     entry: './src/index.tsx',
@@ -30,7 +28,9 @@ module.exports = {
                 path.join(process.cwd(), 'build/**/*')
             ]
         }),
-        new webpack.DefinePlugin(envKeys),
+        new webpack.DefinePlugin({
+            'process.env': JSON.stringify(process.env)
+        }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: './src/index.html'
@@ -39,13 +39,10 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'bundle.[fullhash].css',
             chunkFilename: 'bundle.[fullhash].css'
+        }),
+        new webpack.ProvidePlugin({
+            process: 'process/browser.js'
         })
-        // new webpack.ProvidePlugin({
-        //     Buffer: ['buffer', 'Buffer']
-        // }),
-        // new webpack.ProvidePlugin({
-        //     process: 'process/browser'
-        // })
     ],
     optimization: {
         // tree shaking
