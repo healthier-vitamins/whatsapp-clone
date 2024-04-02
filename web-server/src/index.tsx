@@ -10,6 +10,7 @@ import ErrorPage from './pages/errors/ErrorPage'
 import './styles/main.css'
 
 import { Provider } from 'react-redux'
+import LoginPage from './pages/login/LoginPage'
 import store from './redux/store'
 
 export const router = createBrowserRouter(
@@ -23,7 +24,9 @@ export const router = createBrowserRouter(
                 </div>
             }
             errorElement={<ErrorPage />}
-        ></Route>
+        >
+            <Route path="/login" element={<LoginPage />}></Route>
+        </Route>
     )
 )
 
