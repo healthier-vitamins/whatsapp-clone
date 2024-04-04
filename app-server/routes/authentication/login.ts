@@ -4,7 +4,7 @@ import express from 'express'
 const router = express.Router()
 
 router.post('/login', (req: Request, res: Response) => {
-    res.json('Login successful')
+    res.json({ data: `Login successful` })
 })
 
 module.exports = router
