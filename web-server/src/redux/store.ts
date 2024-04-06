@@ -1,10 +1,10 @@
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit'
 import { authenticationApi } from '../rtk-query/api/authentication.api'
-import { authenticationSlice } from './reducers/authentication.reducer'
+import { miscSlice } from './reducers/misc.reducer'
 
 const store = configureStore({
     reducer: {
-        authentication: authenticationSlice.reducer,
+        misc: miscSlice.reducer,
         [authenticationApi.reducerPath]: authenticationApi.reducer
     },
     middleware: (getDefaultMiddleware) =>
