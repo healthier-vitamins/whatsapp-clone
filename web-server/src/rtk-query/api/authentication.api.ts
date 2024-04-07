@@ -1,15 +1,34 @@
 // Need to use the React-specific entry point to allow generating React hooks
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+/**
+ * @type LoginReqArgs
+ */
+export type LoginReqArgs = {
+    id: string | undefined
+    name: string | undefined
+}
+
+function providesList<R extends { id: string | number }[], T extends string>(
+    resultsWithIds: R | undefined,
+    tagType: T
+) {
+    return resultsWithIds
+        ? [
+              { type: tagType, id: 'LIST' },
+              ...resultsWithIds.map(({ id }) => ({ type: tagType, id }))
+          ]
+        : [{ type: tagType, id: 'LIST' }]
+}
+
 export const authenticationApi = createApi({
     reducerPath: 'authenticationApi',
-    tagTypes: ['Login'],
+    tagTypes: ['Login', 'TestUpdate'],
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:3001/api/authentication',
-        
+        baseUrl: 'http://localhost:3001/api/authentication'
     }),
     endpoints: (build) => ({
-        login: build.query<string, void>({
+        login: build.query<string, LoginReqArgs>({
             providesTags: (result, error, id) => {
                 console.log('result: ', result)
                 console.log('error: ', error)
@@ -64,11 +83,12 @@ export const authenticationApi = createApi({
             //     //   }
             //     return { data: '' }
             // }
-            query: () => ({
-                url: 'login',
+            query: ({ id, name }) => ({
+                url: `login`,
                 method: 'POST',
-                body: ''
-            }),
+                body: { id: id, name: name },
+                params: { id: id, name: name }
+            })
         })
         // testUpdate: build.mutation
     })
