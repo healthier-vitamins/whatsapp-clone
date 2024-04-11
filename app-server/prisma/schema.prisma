@@ -47,13 +47,10 @@ model User {
   passwordHash      String
   phoneNumber       String       @unique
   lastSeen          DateTime?    @default(now())
-  profilePictureURL String?
   status            String?
   chats             Chat[]       @relation("UsersChats")
   messages          Message[]
   UsersChats        UsersChats[]
-  Contact           Contact[]
-  Contact           Contact[]
   Contact           Contact[]
 }
 
