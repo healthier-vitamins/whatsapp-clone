@@ -5,7 +5,7 @@ import configureExpress from './loaders/express'
 require('dotenv').config()
 
 // initialise database
-pingDb()
+// pingDb()
 
 // initialise express
 const expressApp = configureExpress()

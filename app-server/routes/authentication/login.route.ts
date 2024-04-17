@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
 import express from 'express'
-import login from '../../services/authentication/login'
+import login from '../../services/authentication/login.service'
 const router = express.Router()
 
 router.post('/login', (req: Request, res: Response) => {
