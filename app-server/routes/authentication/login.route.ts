@@ -1,15 +1,20 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 
 import express from 'express'
-import login from '../../services/authentication/login.service'
+import authenticationService from '../../services/authentication.service'
 const router = express.Router()
 
-router.post('/login', (req: Request, res: Response) => {
-    console.log(req.query)
-    console.log('body: ', req.body)
-    const response = login()
-    // res.status(StatusCodes.NOT_FOUND).json(response)
-    res.json(response)
-})
+router.post(
+    '/login',
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const authentication = new authenticationService()
+            const data = await authentication.login()
+            res.json({ data: data })
+        } catch (err) {
+            next(err)
+        }
+    }
+)
 
 module.exports = router

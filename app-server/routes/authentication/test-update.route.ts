@@ -1,16 +1,27 @@
-import { PrismaClient } from '@prisma/client'
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 
 import express from 'express'
-import testUpdate from '../../services/authentication/test-update.service'
+import authenticationService from '../../services/authentication.service'
 const router = express.Router()
 
-router.put('/test-update', async (req: Request, res: Response) => {
-    const params = req.body as { hello: string }
-    await testUpdate()
-    res.json({
-        data: `Test update successful:  ${params.hello}`
-    })
-})
+router.put(
+    '/test-update',
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const authentication = new authenticationService()
+
+            const params = req.body as { hello: string }
+            const users = await authentication.testUpdate()
+            res.json({
+                data: {
+                    params: `Test update successful:  ${params.hello}`,
+                    users: users
+                }
+            })
+        } catch (err) {
+            next(err)
+        }
+    }
+)
 
 module.exports = router

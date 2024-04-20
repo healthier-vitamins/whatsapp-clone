@@ -2,6 +2,10 @@ import mysql from 'mysql2'
 
 require('dotenv').config()
 
+/**
+ * @deprecated @function
+ * Connect to MySQL database using mysql2.
+ */
 function pingDb() {
     let dbConnection = mysql.createConnection({
         host: 'localhost',

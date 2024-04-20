@@ -1,10 +1,11 @@
 import compression from 'compression'
 import cors from 'cors'
-import express from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 import helmet from 'helmet'
 import { StatusCodes } from 'http-status-codes'
 import ERROR_MESSAGES from '../globals/ERROR_MESSAGES'
-import setupRoutes from '../routes'
+import setupRoutes from '../routes/index.route'
+import { handleErrors } from '../utilities/loader.utility'
 
 const app: express.Application = express()
 
@@ -25,6 +26,9 @@ function configureExpress() {
     })
 
     setupRoutes(app)
+
+    // middleware to handle errors thrown anywhere in the application
+    app.use(handleErrors)
 
     // reject unregistered routes
     app.all('*', (req, res) => {

@@ -8,6 +8,9 @@
     "scripts": {
         "dev": "nodemon index.ts"
     },
+    "prisma": {
+        "seed": "ts-node --transpile-only prisma/seed.ts"
+    },
     "dependencies": {
         "@prisma/client": "^5.12.1",
         "compression": "^1.7.4",
