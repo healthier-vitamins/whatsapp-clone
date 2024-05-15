@@ -1,6 +1,5 @@
 import { createRoot } from 'react-dom/client'
 import {
-    Outlet,
     Route,
     RouterProvider,
     createBrowserRouter,
@@ -10,6 +9,7 @@ import ErrorPage from './pages/errors/ErrorPage'
 import './styles/main.css'
 
 import { Provider } from 'react-redux'
+import SidebarLayout from './pages/layout/SidebarLayout'
 import LoginPage from './pages/login/LoginPage'
 import store from './redux/store'
 
@@ -17,12 +17,7 @@ export const router = createBrowserRouter(
     createRoutesFromElements(
         <Route
             path={'/'}
-            element={
-                <div>
-                    <div>hello werld</div>
-                    <Outlet />
-                </div>
-            }
+            element={<SidebarLayout />}
             errorElement={<ErrorPage />}
         >
             <Route path="/login" element={<LoginPage />}></Route>

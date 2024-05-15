@@ -67,12 +67,14 @@ module.exports = {
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            publicPath: './'
-                        }
-                    },
+                    //? for sass | css config
+                    // {
+                    //     loader: MiniCssExtractPlugin.loader,
+                    //     options: {
+                    //         publicPath: './'
+                    //     }
+                    // },
+                    'style-loader',
                     'css-loader',
                     //? for sass (however tailwind does not like sass)
                     //* this is needed for sass relative path handling
