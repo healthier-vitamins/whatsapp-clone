@@ -11,4 +11,9 @@ On the other hand, `prisma db push` is used to create the database schema based 
 
 In summary, `prisma migrate dev` is used when you want to persist your database schema changes and generate a history of migrations, while `prisma db push` is used for quick prototyping without the need for migrations.
 
+Vice versa, you may create schemas based off of your database.  
+https://www.prisma.io/docs/orm/prisma-schema/introspection#the-prisma-db-pull-command
+
 # Seeding db
+
+Run `npx prisma db seed` after configuring seed data under prisma/seed.ts
