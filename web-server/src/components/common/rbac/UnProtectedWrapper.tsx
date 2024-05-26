@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import allRoutes from '../../../utilities/routes.utility'
+import useChangeTitle from '../../../hooks/common/useChangeTitle'
+import useDefaultUrl from '../../../hooks/common/useDefaultUrl'
 
 export default function UnProtectedWrapper({
     pageTitle,
@@ -8,11 +8,8 @@ export default function UnProtectedWrapper({
     pageTitle?: string
     children: React.ReactNode
 }) {
-    useEffect(() => {
-        let title = allRoutes.DEFAULT.pageTitle
-        if (pageTitle) title = pageTitle
-        document.title = title
-    }, [])
+    useChangeTitle(pageTitle, [])
+    useDefaultUrl()
 
     return <>{children}</>
 }

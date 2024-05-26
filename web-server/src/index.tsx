@@ -9,12 +9,22 @@ import {
 import ErrorPage from './pages/errors/ErrorPage'
 import './styles/main.css'
 
+import React from 'react'
 import { Provider } from 'react-redux'
+import PageOverlay from './components/common/overlay/PageOverlay'
+import ProtectedWrapper from './components/common/rbac/ProtectedWrapper'
 import UnProtectedWrapper from './components/common/rbac/UnProtectedWrapper'
-import SidebarLayout from './pages/layout/SidebarLayout'
 import LoginPage from './pages/login/LoginPage'
 import store from './redux/store'
 import allRoutes from './utilities/routes.utility'
+
+function renderComponent(component: React.ComponentType | undefined) {
+    if (component) {
+        return React.createElement(component)
+    } else {
+        return <></>
+    }
+}
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -29,7 +39,20 @@ export const router = createBrowserRouter(
             }
             errorElement={<ErrorPage />}
         >
-            <Route path="/chats" element={<SidebarLayout />}></Route>
+            <Route
+                path={allRoutes.CHATS.url}
+                element={
+                    <ProtectedWrapper
+                        children={
+                            <PageOverlay
+                                children={renderComponent(
+                                    allRoutes.CHATS.component
+                                )}
+                            />
+                        }
+                    />
+                }
+            ></Route>
             <Route path="/login" element={<LoginPage />}></Route>
         </Route>
     )

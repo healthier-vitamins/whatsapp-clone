@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router-dom'
-import Sidebar from '../../components/specific/sidebar/Sidebar'
+import Sidebar from '../../components/sidebar/Sidebar'
 
 export default function SidebarLayout() {
     return (
-        <div className="h-dvh w-screen">
-            <div className="h-dvh max-w-lg border-2 border-solid border-indigo-600">
+        <>
+            <div className="h-full w-full max-w-lg">
                 <Sidebar />
             </div>
             <Outlet />
-        </div>
+        </>
     )
 }
