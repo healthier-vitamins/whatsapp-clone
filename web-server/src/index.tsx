@@ -14,7 +14,6 @@ import { Provider } from 'react-redux'
 import PageOverlay from './components/common/overlay/PageOverlay'
 import ProtectedWrapper from './components/common/rbac/ProtectedWrapper'
 import UnProtectedWrapper from './components/common/rbac/UnProtectedWrapper'
-import LoginPage from './pages/login/LoginPage'
 import store from './redux/store'
 import allRoutes from './utilities/routes.utility'
 
@@ -53,7 +52,14 @@ export const router = createBrowserRouter(
                     />
                 }
             ></Route>
-            <Route path="/login" element={<LoginPage />}></Route>
+            <Route
+                path={allRoutes.LOGIN.url}
+                element={
+                    <UnProtectedWrapper>
+                        {renderComponent(allRoutes.LOGIN.component)}
+                    </UnProtectedWrapper>
+                }
+            ></Route>
         </Route>
     )
 )

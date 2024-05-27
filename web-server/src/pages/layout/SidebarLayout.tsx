@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom'
-import Sidebar from '../../components/sidebar/Sidebar'
+import SidebarContainer from '../../components/sidebar/SidebarContainer'
 
 export default function SidebarLayout() {
     return (
         <>
-            <div className="h-full w-full max-w-lg">
-                <Sidebar />
+            <div className="h-full w-full max-w-[450px]">
+                <SidebarContainer />
             </div>
             <Outlet />
         </>
