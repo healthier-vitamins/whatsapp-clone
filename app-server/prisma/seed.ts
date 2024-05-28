@@ -7,7 +7,8 @@ async function main() {
         data: {
             passwordHash: '123',
             phoneNumber: '12345678',
-            username: 'admin-boi'
+            username: 'admin-boi',
+            
         }
     })
 }
