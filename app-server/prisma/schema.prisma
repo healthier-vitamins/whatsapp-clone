@@ -16,40 +16,49 @@ datasource db {
 model User {
   id           String            @id @default(uuid())
   username     String            @unique
-  passwordHash String
+  passwordHash String?            
   phoneNumber  String            @unique
   lastSeen     DateTime?         @default(now())
   status       String?
-  chats        UserChatMapping[]
-  // TODO message should be under chat
-  // 
+  contacts Contact[]
   Message      Message?
-  Contact      Contact?
 }
 
 model Chat {
   id           String            @id @default(uuid())
   creationDate DateTime          @default(now())
-  users        UserChatMapping[]
-  messages     Message[]
+  // users        UserChatMapping[]
+  // messages     Message[]
+  message     ChatMessageMapping[]
 }
 
-// intermediate table for many-to-many relationship between Users and Chats
-model UserChatMapping {
-  user   User   @relation(fields: [userId], references: [id])
-  userId String // relation scalar field (used in the `@relation` attribute above)
+model ChatMessageMapping {
+  // id  String  @id @default(uuid())
+chat  Chat  @relation(fields: [chatId], references: [id])
+chatId String
 
-  chat   Chat   @relation(fields: [chatId], references: [id])
-  chatId String // relation scalar field (used in the `@relation` attribute above)
+message Message @relation(fields: [messageId], references: [id])
+messageId String
 
-  @@id([userId, chatId])
+@@id([chatId,  messageId])
 }
+
+// // intermediate table for many-to-many relationship between Users and Chats
+// model UserChatMapping {
+//   user   User   @relation(fields: [userId], references: [id])
+//   userId String // relation scalar field (used in the `@relation` attribute above)
+
+//   chat   Chat   @relation(fields: [chatId], references: [id])
+//   chatId String // relation scalar field (used in the `@relation` attribute above)
+
+//   @@id([userId, chatId])
+// }
 
 model Message {
   id String @id @default(uuid())
 
-  chat   Chat   @relation(fields: [chatId], references: [id])
-  chatId String
+  // chat   Chat   @relation(fields: [chatId], references: [id])
+  // chatId String
 
   sender   User   @relation(fields: [senderId], references: [id])
   senderId String @unique // relation scalar field (used in the `@relation` attribute above)
@@ -58,14 +67,17 @@ model Message {
   type        String   @default("text") // could be "text", "image", "video", etc.
   timestamp   DateTime @default(now())
   readReceipt Boolean  @default(false)
+
+  chats ChatMessageMapping[]
 }
 
-// optional: contacts table
 model Contact {
   id     String @id @default(uuid())
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @unique
 
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  
+  phoneNumber  String
   nickname      String?
   blockedStatus Boolean @default(false)
 }

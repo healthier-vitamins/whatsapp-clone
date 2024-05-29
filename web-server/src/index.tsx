@@ -11,8 +11,6 @@ import './styles/main.css'
 
 import React from 'react'
 import { Provider } from 'react-redux'
-import PageOverlay from './components/common/overlay/PageOverlay'
-import ProtectedWrapper from './components/common/rbac/ProtectedWrapper'
 import UnProtectedWrapper from './components/common/rbac/UnProtectedWrapper'
 import store from './redux/store'
 import allRoutes from './utilities/routes.utility'
@@ -40,17 +38,7 @@ export const router = createBrowserRouter(
         >
             <Route
                 path={allRoutes.CHATS.url}
-                element={
-                    <ProtectedWrapper
-                        children={
-                            <PageOverlay
-                                children={renderComponent(
-                                    allRoutes.CHATS.component
-                                )}
-                            />
-                        }
-                    />
-                }
+                element={renderComponent(allRoutes.CHATS.component)}
             ></Route>
             <Route
                 path={allRoutes.LOGIN.url}

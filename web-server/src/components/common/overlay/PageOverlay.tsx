@@ -9,11 +9,16 @@ export default function PageOverlay({
     children: React.ReactNode
 }) {
     return (
-        <div className="relative">
-            {/* // copied green background colour from whatsapp */}
-            <div className="absolute left-0 top-0 z-0 h-[127px] w-full bg-[#00a884] " />
-            <div className="absolute left-0 top-0 z-[1] m-[18px] h-[calc(100vh-36px)] max-h-[calc(100vh-36px)] w-[calc(100vw-36px)] max-w-[calc(100vw-36px)]  bg-slate-100">
-                <div className="relative h-full ">{children}</div>
+        <div className="h-screen w-screen overflow-hidden">
+            <div className="flex h-full w-full flex-col">
+                {/* // copied green background colour from whatsapp */}
+                <div className=" z-0 h-[127px] w-full bg-[#00a884] " />
+                <div className=" z-[1] h-full w-full  bg-gray-200" />
+            </div>
+            <div className="absolute inset-y-0 z-[2] flex h-full w-full items-center justify-center">
+                <div className="h-full max-h-[1235px] w-full max-w-[1700px]">
+                    {children}
+                </div>
             </div>
         </div>
     )

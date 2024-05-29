@@ -1,4 +1,4 @@
-import SidebarLayout from '../pages/layout/SidebarLayout'
+import ChatPage from '../pages/chat/ChatPage'
 import LoginPage from '../pages/login/LoginPage'
 
 interface Route {
@@ -21,7 +21,7 @@ const allRoutes: AllRoutes = {
         url: '/'
     },
     CHATS: {
-        component: SidebarLayout,
+        component: ChatPage,
         pageTitle: '',
         permissions: [],
         url: '/chats'

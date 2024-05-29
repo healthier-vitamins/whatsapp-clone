@@ -1,5 +1,4 @@
 import http from 'http'
-import pingDb from './loaders/dbConnection'
 import configureExpress from './loaders/express'
 
 require('dotenv').config()
@@ -40,3 +39,4 @@ portList.forEach((port) => {
 })
 
 export { serverInstances }
+
