@@ -17,7 +17,7 @@ export default function NotificationBar() {
                     <span className=" text-sm text-[#111b21] hover:underline">
                         Turn on desktop notifications
                     </span>
-                    <ChevronRight className=" mt-[5.5px]" />
+                    <ChevronRight className="ml-[2px] mt-[5.4px]" />
                 </div>
             </div>
             <div className="ml-auto">

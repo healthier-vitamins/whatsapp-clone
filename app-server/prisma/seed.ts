@@ -3,14 +3,23 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main() {
-    await prisma.user.create({
-        data: {
+    await prisma.user.createMany({
+        data: [{ 
             passwordHash: '123',
-            phoneNumber: '12345678',
-            username: 'admin-boi',
-            
+            phoneNumber: '00000001',
+            username: 'Koh Zhi Xian',
+        }, {
+            passwordHash: '123',
+            phoneNumber: '00000002',
+            username: 'Shandy',
+        },
+         {
+            passwordHash: '123',
+            phoneNumber: '00000003',
+            username: 'Daniel',
         }
-    })
+     ]}
+    )
 }
 
 main()

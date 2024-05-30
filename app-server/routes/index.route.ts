@@ -1,11 +1,17 @@
 import { Application } from 'express'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 
 export default function setupRoutes(app: Application) {
-    // dynamically load routes from the 'authentication' directory
-    const authenticationPath = path.join(__dirname, 'authentication')
-    useExpressPath(authenticationPath, app, '/api/authentication')
+    const indexFileName = "index.route.ts"
+    const allFiles = fs.readdirSync(__dirname)
+    for (let fileName of allFiles) {
+        if (fileName != indexFileName) {
+            // dynamically load routes based on folders' names
+            const authenticationPath = path.join(__dirname, fileName)
+            useExpressPath(authenticationPath, app, `/api/${fileName}`)
+        }
+    }
 }
 
 function useExpressPath(selectedPath: string, app: Application, url: string) {
