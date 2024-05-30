@@ -4,7 +4,6 @@
         "aaron-bond.better-comments",
         "dbaeumer.vscode-eslint",
         "Prisma.prisma",
-        "bradlc.vscode-tailwindcss",
-        
+        "bradlc.vscode-tailwindcss"
     ]
 }
