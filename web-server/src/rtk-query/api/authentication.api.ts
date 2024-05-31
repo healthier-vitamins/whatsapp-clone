@@ -95,3 +95,5 @@ export const authenticationApi = createApi({
 })
 
 export const { useLoginQuery } = authenticationApi
+const apiAuthentication = authenticationApi
+export default apiAuthentication

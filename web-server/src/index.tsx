@@ -3,6 +3,7 @@ import {
     Outlet,
     Route,
     RouterProvider,
+    Routes,
     createBrowserRouter,
     createRoutesFromElements
 } from 'react-router-dom'
@@ -14,6 +15,9 @@ import { Provider } from 'react-redux'
 import UnProtectedWrapper from './components/common/rbac/UnProtectedWrapper'
 import store from './redux/store'
 import allRoutes from './utilities/routes.utility'
+import NotFoundPage from './pages/errors/NotFoundPage'
+import CustomRouter from './components/CustomBrowserRouter'
+import customHistory from './components/CustomHistory'
 
 function renderComponent(component: React.ComponentType | undefined) {
     if (component) {
@@ -23,34 +27,36 @@ function renderComponent(component: React.ComponentType | undefined) {
     }
 }
 
-export const router = createBrowserRouter(
-    createRoutesFromElements(
-        <Route
-            path={allRoutes.DEFAULT.url}
-            element={
-                <UnProtectedWrapper>
-                    <div>
-                        <Outlet />
-                    </div>
-                </UnProtectedWrapper>
-            }
-            errorElement={<ErrorPage />}
-        >
-            <Route
-                path={allRoutes.CHATS.url}
-                element={renderComponent(allRoutes.CHATS.component)}
-            ></Route>
-            <Route
-                path={allRoutes.LOGIN.url}
-                element={
-                    <UnProtectedWrapper>
-                        {renderComponent(allRoutes.LOGIN.component)}
-                    </UnProtectedWrapper>
-                }
-            ></Route>
-        </Route>
-    )
-)
+// ? to be used with react router
+// export const router = createBrowserRouter(
+//     createRoutesFromElements(
+//         <Route
+//             path={allRoutes.DEFAULT.url}
+//             element={
+//                 <UnProtectedWrapper>
+//                     <div>
+//                         <Outlet />
+//                     </div>
+//                 </UnProtectedWrapper>
+//             }
+//             errorElement={<ErrorPage />}
+//         >
+//             <Route
+//                 path={allRoutes.CHATS.url}
+//                 element={renderComponent(allRoutes.CHATS.component)}
+//             ></Route>
+
+//             <Route
+//                 path={allRoutes.LOGIN.url}
+//                 element={
+//                     <UnProtectedWrapper>
+//                         {renderComponent(allRoutes.LOGIN.component)}
+//                     </UnProtectedWrapper>
+//                 }
+//             ></Route>
+//         </Route>
+//     )
+// )
 
 // update react 18
 // https://react.dev/blog/2022/03/08/react-18-upgrade-guide
@@ -58,6 +64,44 @@ const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
 root.render(
     <Provider store={store}>
-        <RouterProvider router={router} />
+        {/* <RouterProvider router={router} /> */}
+        <CustomRouter history={customHistory}>
+            <Routes>
+                <Route
+                    path={allRoutes.DEFAULT.url}
+                    element={
+                        <UnProtectedWrapper>
+                            <Outlet />
+                        </UnProtectedWrapper>
+                    }
+                />
+                <Route
+                    path={allRoutes.CHATS.url}
+                    element={
+                        <UnProtectedWrapper>
+                            {renderComponent(allRoutes.CHATS.component)}
+                        </UnProtectedWrapper>
+                    }
+                ></Route>
+
+                <Route
+                    path={allRoutes.LOGIN.url}
+                    element={
+                        <UnProtectedWrapper>
+                            {renderComponent(allRoutes.LOGIN.component)}
+                        </UnProtectedWrapper>
+                    }
+                ></Route>
+
+                <Route
+                    path="*"
+                    element={
+                        <UnProtectedWrapper>
+                            <NotFoundPage />
+                        </UnProtectedWrapper>
+                    }
+                />
+            </Routes>
+        </CustomRouter>
     </Provider>
 )

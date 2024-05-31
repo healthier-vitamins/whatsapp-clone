@@ -1,22 +1,18 @@
-import { useRouteError } from 'react-router-dom'
-import { isDevelopment } from '../../utilities/env.utility'
-
 export default function ErrorPage() {
-    const error: any = useRouteError()
+    // ? to be used with react router
+    // const error: any = useRouteError()
 
-    function renderErrorInfo() {
-        if (!error) return
-        console.log('error: ', error)
-        if (isDevelopment()) return error?.statusText || error?.message || ''
-    }
-
+    // function renderErrorInfo() {
+    //     if (!error) return
+    //     console.log('error: ', error)
+    //     if (isDevelopment()) return error?.statusText || error?.message || ''
+    // }
     return (
         <div className="flex h-dvh w-screen flex-col items-center justify-center">
             <h1 className="mb-1 text-4xl font-medium">Oops!</h1>
             <span className="text-base">
                 Sorry, an unexpected error has occurred.
             </span>
-            <span>{renderErrorInfo()}</span>
 
             {/* <div className="relative flex h-screen items-center justify-center">
                 <div className="group relative">

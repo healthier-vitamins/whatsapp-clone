@@ -1,15 +1,17 @@
-import ChipsNav from './ChipsNav'
-import SearchBar from './SearchBar'
-import TopNav from './TopNav'
-import ChatsContainer from './chat/ChatsContainer'
+import useHistory from '../../hooks/common/useHistory'
+import { useAppSelector } from '../../redux/hooks'
+import ChatSidebar from './ChatsSidebar'
+import NewChatSidebar from './new-chat/NewChatSidebar'
 
 export default function SidebarContainer() {
-    return (
-        <div className="flex-col ">
-            <TopNav />
-            <SearchBar />
-            <ChipsNav />
-            <ChatsContainer />
-        </div>
-    )
+    // -- Redux
+    const miscSelector = useAppSelector((state) => state.misc)
+
+    useHistory()
+
+    if (!miscSelector.topNavButtonState) {
+        return <ChatSidebar />
+    } else if (miscSelector.topNavButtonState === 'NEW_CHAT') {
+        return <NewChatSidebar />
+    }
 }

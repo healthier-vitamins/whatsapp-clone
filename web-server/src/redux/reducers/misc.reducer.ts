@@ -1,12 +1,16 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 
+export type TopNavButtonStateType = 'NEW_CHAT' | undefined
+
 interface MiscState {
     initialUrl: string
+    topNavButtonState: TopNavButtonStateType
 }
 
 const initialState: MiscState = {
-    initialUrl: ''
+    initialUrl: '',
+    topNavButtonState: undefined
 }
 
 export const miscSlice = createSlice({
@@ -14,10 +18,14 @@ export const miscSlice = createSlice({
     initialState,
     reducers: {
         reset: (state) => {
+            initialState.topNavButtonState = state.topNavButtonState
             return initialState
         },
-        setUser: (state, action: PayloadAction<string>) => {
-            state.initialUrl = action.payload
+        setTopNavButton: (
+            state,
+            action: PayloadAction<TopNavButtonStateType>
+        ) => {
+            state.topNavButtonState = action.payload
         }
     }
 })
