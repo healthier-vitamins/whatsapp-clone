@@ -1,15 +1,19 @@
 import { skipToken } from '@reduxjs/toolkit/query'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
-import customHistory from '../../components/CustomHistory'
+import customHistory from '../../components/router/CustomHistory'
 import dateConstant from '../../globals/date.constant'
 import useHistory from '../../hooks/common/useHistory'
-import { useLoginQuery } from '../../rtk-query/api/authentication.api'
+import apiAuthentication, {
+    useLoginQuery
+} from '../../rtk-query/api/authentication.api'
 
 export default function LoginPage() {
     const [args, setArgs] = useState({ id: 's1111', name: 'heeyo' })
     // const test = true
     // if (test) customHistory.block(() => {})
+
+    useHistory()
 
     const {
         isError,

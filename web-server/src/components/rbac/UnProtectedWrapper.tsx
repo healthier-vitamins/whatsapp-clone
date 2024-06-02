@@ -1,7 +1,5 @@
-import { useEffect } from 'react'
-import useChangeTitle from '../../../hooks/common/useChangeTitle'
-import useDefaultUrl from '../../../hooks/common/useDefaultUrl'
-import customHistory from '../../CustomHistory'
+import useChangeTitle from '../../hooks/common/useChangeTitle'
+import useDefaultUrl from '../../hooks/common/useDefaultUrl'
 
 export default function UnProtectedWrapper({
     pageTitle,

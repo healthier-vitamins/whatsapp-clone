@@ -1,6 +1,10 @@
-import Search from '../../svgs/Search'
+import Search from '../../../svgs/Search'
 
-export default function SearchBar() {
+export default function SearchBar({
+    placeholderText
+}: {
+    placeholderText?: string
+}) {
     return (
         <div className="flex h-full w-full bg-white px-4 pb-2 pt-2">
             {/* <div className="mx-auto max-w-sm">
@@ -28,7 +32,7 @@ export default function SearchBar() {
             <label className="relative block w-full">
                 <Search className="absolute left-4 top-[10px] h-4 w-4 text-[#3b4a54]" />
                 <input
-                    placeholder="Search"
+                    placeholder={placeholderText}
                     className="h-[35px] w-full rounded-lg bg-[rgb(240,242,245)] py-1 pl-12 pr-4 text-[#3b4a54] placeholder:text-gray-500 focus:outline-none"
                 ></input>
             </label>

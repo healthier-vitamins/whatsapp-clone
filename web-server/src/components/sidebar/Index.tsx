@@ -1,7 +1,7 @@
 import useHistory from '../../hooks/common/useHistory'
 import { useAppSelector } from '../../redux/hooks'
 import ChatSidebar from './ChatsSidebar'
-import NewChatSidebar from './new-chat/NewChatSidebar'
+import NewChatSidebar from './new-chat/Index'
 
 export default function SidebarContainer() {
     // -- Redux

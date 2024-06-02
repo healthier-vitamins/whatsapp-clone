@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from 'express'
 
 import express from 'express'
-import authenticationService from '../../services/authentication.service'
+import AuthenticationService from '../../services/authentication.service'
 const router = express.Router()
 
 router.put(
     '/test-update',
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const authentication = new authenticationService()
+            const authentication = new AuthenticationService()
 
             const params = req.body as { hello: string }
             const users = await authentication.testUpdate()

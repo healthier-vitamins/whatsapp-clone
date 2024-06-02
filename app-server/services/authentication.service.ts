@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import ErrorResponse from '../utilities/ErrorResponse'
 import { StatusCodes } from 'http-status-codes'
 
-export default class authenticationService {
+export default class AuthenticationService {
     private prisma: PrismaClient
 
     constructor() {

@@ -9,20 +9,20 @@ export type LoginReqArgs = {
     name: string | undefined
 }
 
-function providesList<R extends { id: string | number }[], T extends string>(
-    resultsWithIds: R | undefined,
-    tagType: T
-) {
-    return resultsWithIds
-        ? [
-              { type: tagType, id: 'LIST' },
-              ...resultsWithIds.map(({ id }) => ({ type: tagType, id }))
-          ]
-        : [{ type: tagType, id: 'LIST' }]
-}
+// function providesList<R extends { id: string | number }[], T extends string>(
+//     resultsWithIds: R | undefined,
+//     tagType: T
+// ) {
+//     return resultsWithIds
+//         ? [
+//               { type: tagType, id: 'LIST' },
+//               ...resultsWithIds.map(({ id }) => ({ type: tagType, id }))
+//           ]
+//         : [{ type: tagType, id: 'LIST' }]
+// }
 
-export const authenticationApi = createApi({
-    reducerPath: 'authenticationApi',
+const apiAuthentication = createApi({
+    reducerPath: 'apiAuthentication',
     tagTypes: ['Login', 'TestUpdate'],
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3001/api/authentication'
@@ -94,6 +94,5 @@ export const authenticationApi = createApi({
     })
 })
 
-export const { useLoginQuery } = authenticationApi
-const apiAuthentication = authenticationApi
+export const { useLoginQuery } = apiAuthentication
 export default apiAuthentication

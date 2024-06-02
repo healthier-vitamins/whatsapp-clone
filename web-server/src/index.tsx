@@ -12,12 +12,12 @@ import './styles/main.css'
 
 import React from 'react'
 import { Provider } from 'react-redux'
-import UnProtectedWrapper from './components/common/rbac/UnProtectedWrapper'
+import UnProtectedWrapper from './components/rbac/UnProtectedWrapper'
 import store from './redux/store'
 import allRoutes from './utilities/routes.utility'
 import NotFoundPage from './pages/errors/NotFoundPage'
-import CustomRouter from './components/CustomBrowserRouter'
-import customHistory from './components/CustomHistory'
+import CustomRouter from './components/router/CustomBrowserRouter'
+import customHistory from './components/router/CustomHistory'
 
 function renderComponent(component: React.ComponentType | undefined) {
     if (component) {

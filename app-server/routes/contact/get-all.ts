@@ -1,15 +1,16 @@
 import { NextFunction, Request, Response } from 'express'
 
 import express from 'express'
-import AuthenticationService from '../../services/authentication.service'
+import ContactService from '../../services/contacts.service'
 const router = express.Router()
 
-router.post(
-    '/login',
+router.get(
+    '/get-all',
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const authentication = new AuthenticationService()
-            const data = await authentication.login()
+            const contact = new ContactService()
+            const data = await contact.getAll()
+            console.log(data)
             res.json({ data: data })
         } catch (err) {
             next(err)

@@ -1,11 +1,11 @@
-import PageOverlay from '../../components/common/overlay/PageOverlay'
-import ProtectedWrapper from '../../components/common/rbac/ProtectedWrapper'
-import SidebarLayout from '../layout/SidebarLayout'
+import OverallLayout from '../../components/layout/OverallLayout'
+import PageOverlay from '../../components/overlay/PageOverlay'
+import ProtectedWrapper from '../../components/rbac/ProtectedWrapper'
 
 export default function ChatPage() {
     return (
         <ProtectedWrapper
-            children={<PageOverlay children={<SidebarLayout />} />}
+            children={<PageOverlay children={<OverallLayout />} />}
         />
     )
 }

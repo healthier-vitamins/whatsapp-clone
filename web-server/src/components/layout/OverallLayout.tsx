@@ -1,6 +1,6 @@
-import SidebarContainer from '../../components/sidebar/SidebarContainer'
+import SidebarContainer from '../sidebar/Index'
 
-export default function SidebarLayout() {
+export default function OverallLayout() {
     return (
         <div className="flex h-full w-full">
             <div className="h-full w-full max-w-[450px]">

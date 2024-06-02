@@ -1,4 +1,4 @@
-import customHistory from '../../components/CustomHistory'
+import customHistory from '../../components/router/CustomHistory'
 import useHistory from '../../hooks/common/useHistory'
 
 export default function NotFoundPage() {
