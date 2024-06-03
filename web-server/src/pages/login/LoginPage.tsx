@@ -68,5 +68,10 @@ export default function LoginPage() {
     //     }, 1000)
     // }, [])
 
-    return <>{data}</>
+    return (
+        <div className="flex h-screen w-screen flex-col">
+            <div className="h-[222px] min-h-[222px]  w-full bg-[#00a884]" />
+            <div className="h-full w-full bg-slate-100" />
+        </div>
+    )
 }

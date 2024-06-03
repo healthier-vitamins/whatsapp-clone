@@ -18,6 +18,7 @@ import allRoutes from './utilities/routes.utility'
 import NotFoundPage from './pages/errors/NotFoundPage'
 import CustomRouter from './components/router/CustomBrowserRouter'
 import customHistory from './components/router/CustomHistory'
+import ProtectedWrapper from './components/rbac/ProtectedWrapper'
 
 function renderComponent(component: React.ComponentType | undefined) {
     if (component) {
@@ -67,20 +68,20 @@ root.render(
         {/* <RouterProvider router={router} /> */}
         <CustomRouter history={customHistory}>
             <Routes>
-                <Route
+                {/* <Route
                     path={allRoutes.DEFAULT.url}
                     element={
                         <UnProtectedWrapper>
                             <Outlet />
                         </UnProtectedWrapper>
                     }
-                />
+                /> */}
                 <Route
                     path={allRoutes.CHATS.url}
                     element={
-                        <UnProtectedWrapper>
+                        <ProtectedWrapper>
                             {renderComponent(allRoutes.CHATS.component)}
-                        </UnProtectedWrapper>
+                        </ProtectedWrapper>
                     }
                 ></Route>
 
