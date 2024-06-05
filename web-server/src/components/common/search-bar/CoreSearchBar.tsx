@@ -1,6 +1,6 @@
 import Search from '../../../svgs/Search'
 
-export default function SearchBar({
+export default function CoreSearchBar({
     placeholderText
 }: {
     placeholderText?: string

@@ -1,6 +1,6 @@
 import useChangeTopNavButtonState from '../../../hooks/common/useChangeTopNavButtonState'
 import BackButtonSvg from '../../../svgs/BackButtonSvg'
-import SearchBar from '../../common/search-bar/SearchBar'
+import CoreSearchBar from '../../common/search-bar/CoreSearchBar'
 import ContactsContainer from './contacts/Index'
 
 export default function NewChatSidebar() {
@@ -20,7 +20,7 @@ export default function NewChatSidebar() {
                     </span>
                 </div>
             </div>
-            <SearchBar placeholderText="Search name or number" />
+            <CoreSearchBar placeholderText="Search name or number" />
             <ContactsContainer />
         </div>
     )

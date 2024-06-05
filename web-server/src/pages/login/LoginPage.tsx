@@ -1,12 +1,10 @@
 import { skipToken } from '@reduxjs/toolkit/query'
 import moment from 'moment'
-import { useEffect, useState } from 'react'
-import customHistory from '../../components/router/CustomHistory'
+import { useState } from 'react'
+import CoreTextDropdown from '../../components/common/select/CoreTextDropdown'
 import dateConstant from '../../globals/date.constant'
 import useHistory from '../../hooks/common/useHistory'
-import apiAuthentication, {
-    useLoginQuery
-} from '../../rtk-query/api/authentication.api'
+import { useLoginQuery } from '../../rtk-query/api/authentication.api'
 
 export default function LoginPage() {
     const [args, setArgs] = useState({ id: 's1111', name: 'heeyo' })
@@ -69,9 +67,23 @@ export default function LoginPage() {
     // }, [])
 
     return (
-        <div className="flex h-screen w-screen flex-col">
+        <div className=" flex h-screen w-screen flex-col">
             <div className="h-[222px] min-h-[222px]  w-full bg-[#00a884]" />
             <div className="h-full w-full bg-slate-100" />
+            <div className="absolute inset-y-0 z-[1] flex h-full w-full items-center justify-center">
+                <div className="h-full max-h-[950px] w-full max-w-[950px] bg-slate-200">
+                    <div className="flex h-full w-1/3 flex-col items-center ">
+                        <form>
+                            <label>Select a user</label>
+                            <select>
+                                <option>ur muthter 1</option>
+                                <option>ur muthter 2</option>
+                            </select>
+                        </form>
+                        {/* <CoreTextDropdown placeholder="Select a User" /> */}
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

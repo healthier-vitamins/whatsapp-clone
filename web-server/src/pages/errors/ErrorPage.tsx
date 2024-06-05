@@ -1,19 +1,31 @@
-export default function ErrorPage() {
+import { ErrorBoundaryState } from '../../components/errors/ErrorBoundary'
+import { isDevelopment } from '../../utilities/env.utility'
+
+export default function ErrorPage(props?: ErrorBoundaryState) {
     // ? to be used with react router
     // const error: any = useRouteError()
 
-    // function renderErrorInfo() {
-    //     if (!error) return
-    //     console.log('error: ', error)
-    //     if (isDevelopment()) return error?.statusText || error?.message || ''
-    // }
-    return (
-        <div className="flex h-dvh w-screen flex-col items-center justify-center">
-            <h1 className="mb-1 text-4xl font-medium">Oops!</h1>
-            <span className="text-base">
-                Sorry, an unexpected error has occurred.
-            </span>
+    // ! Functions
+    function renderErrorInfo() {
+        if (isDevelopment() && props && props.error)
+            return (
+                <div className="flex  flex-col items-center justify-center">
+                    <span className="font-semibold text-red-600">
+                        {props.error.toString()}
+                    </span>
 
+                    <div className="max-h-64 max-w-[600px] overflow-y-auto text-red-500">
+                        {props.errorInfo?.componentStack}
+                    </div>
+                </div>
+            )
+    }
+
+    return (
+        <div className="flex h-screen w-screen flex-col items-center justify-center">
+            <h1 className="mb-1 text-4xl font-medium">Oops!</h1>
+            <span className="text-base">An unexpected error has occurred.</span>
+            {renderErrorInfo()}
             {/* <div className="relative flex h-screen items-center justify-center">
                 <div className="group relative">
                     <button className="rounded-md bg-blue-500 px-4 py-2 text-white">

@@ -19,6 +19,7 @@ import NotFoundPage from './pages/errors/NotFoundPage'
 import CustomRouter from './components/router/CustomBrowserRouter'
 import customHistory from './components/router/CustomHistory'
 import ProtectedWrapper from './components/rbac/ProtectedWrapper'
+import ErrorBoundary from './components/errors/ErrorBoundary'
 
 function renderComponent(component: React.ComponentType | undefined) {
     if (component) {
@@ -67,8 +68,9 @@ root.render(
     <Provider store={store}>
         {/* <RouterProvider router={router} /> */}
         <CustomRouter history={customHistory}>
-            <Routes>
-                {/* <Route
+            <ErrorBoundary>
+                <Routes>
+                    {/* <Route
                     path={allRoutes.DEFAULT.url}
                     element={
                         <UnProtectedWrapper>
@@ -76,33 +78,34 @@ root.render(
                         </UnProtectedWrapper>
                     }
                 /> */}
-                <Route
-                    path={allRoutes.CHATS.url}
-                    element={
-                        <ProtectedWrapper>
-                            {renderComponent(allRoutes.CHATS.component)}
-                        </ProtectedWrapper>
-                    }
-                ></Route>
+                    <Route
+                        path={allRoutes.CHATS.url}
+                        element={
+                            <ProtectedWrapper>
+                                {renderComponent(allRoutes.CHATS.component)}
+                            </ProtectedWrapper>
+                        }
+                    ></Route>
 
-                <Route
-                    path={allRoutes.LOGIN.url}
-                    element={
-                        <UnProtectedWrapper>
-                            {renderComponent(allRoutes.LOGIN.component)}
-                        </UnProtectedWrapper>
-                    }
-                ></Route>
+                    <Route
+                        path={allRoutes.LOGIN.url}
+                        element={
+                            <UnProtectedWrapper>
+                                {renderComponent(allRoutes.LOGIN.component)}
+                            </UnProtectedWrapper>
+                        }
+                    ></Route>
 
-                <Route
-                    path="*"
-                    element={
-                        <UnProtectedWrapper>
-                            <NotFoundPage />
-                        </UnProtectedWrapper>
-                    }
-                />
-            </Routes>
+                    <Route
+                        path="*"
+                        element={
+                            <UnProtectedWrapper>
+                                <NotFoundPage />
+                            </UnProtectedWrapper>
+                        }
+                    />
+                </Routes>
+            </ErrorBoundary>
         </CustomRouter>
     </Provider>
 )

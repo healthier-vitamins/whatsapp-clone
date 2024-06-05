@@ -16,7 +16,7 @@ export default function PageOverlay({
                 <div className=" z-[1] h-full w-full  bg-gray-200" />
             </div>
             <div className="absolute inset-y-0 z-[2] flex h-full w-full items-center justify-center xl:p-4">
-                <div className="h-full max-h-[1235px] w-full max-w-[1700px]">
+                <div className="h-full xl:max-h-[1235px] w-full xl:max-w-[1700px]">
                     {children}
                 </div>
             </div>
