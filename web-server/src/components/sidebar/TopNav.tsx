@@ -1,10 +1,10 @@
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import useChangeTopNavButtonState from '../../hooks/common/useChangeTopNavButtonState'
-import Channel from '../../svgs/Channel'
-import CommunityGroup from '../../svgs/CommunityGroup'
-import Ellipsis from '../../svgs/Ellipsis'
-import NewChat from '../../svgs/NewChat'
-import Status from '../../svgs/Status'
+import ChannelSvg from '../../svgs/ChannelSvg'
+import CommunityGroupSvg from '../../svgs/CommunityGroupSvg'
+import EllipsisSvg from '../../svgs/EllipsisSvg'
+import NewChatSvg from '../../svgs/NewChatSvg'
+import StatusSvg from '../../svgs/StatusSvg'
 const BUTTON_CLASS = 'flex h-10 w-10 cursor-pointer items-center justify-center'
 
 export default function TopNav() {
@@ -22,13 +22,13 @@ export default function TopNav() {
                     />
                 </div>
                 <div className={BUTTON_CLASS}>
-                    <CommunityGroup />
+                    <CommunityGroupSvg />
                 </div>
                 <div className={BUTTON_CLASS}>
-                    <Status />
+                    <StatusSvg />
                 </div>
                 <div className={BUTTON_CLASS}>
-                    <Channel />
+                    <ChannelSvg />
                 </div>
                 <div
                     className={BUTTON_CLASS}
@@ -36,10 +36,10 @@ export default function TopNav() {
                         changeTopNavButton.onClick('NEW_CHAT')
                     }}
                 >
-                    <NewChat />
+                    <NewChatSvg />
                 </div>
                 <div className={BUTTON_CLASS}>
-                    <Ellipsis />
+                    <EllipsisSvg />
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import Search from '../../../svgs/Search'
+import SearchSvg from '../../../svgs/SearchSvg'
 
 export default function CoreSearchBar({
     placeholderText
@@ -30,7 +30,7 @@ export default function CoreSearchBar({
                 </div>
             </div> */}
             <label className="relative block w-full">
-                <Search className="absolute left-4 top-[10px] h-4 w-4 text-[#3b4a54]" />
+                <SearchSvg className="absolute left-4 top-[10px] h-4 w-4 text-[#3b4a54]" />
                 <input
                     placeholder={placeholderText}
                     className="h-[35px] w-full rounded-lg bg-[rgb(240,242,245)] py-1 pl-12 pr-4 text-[#3b4a54] placeholder:text-gray-500 focus:outline-none"

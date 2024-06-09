@@ -1,4 +1,4 @@
-export default function Status() {
+export default function StatusSvg() {
     return (
         <svg
             viewBox="0 0 24 24"

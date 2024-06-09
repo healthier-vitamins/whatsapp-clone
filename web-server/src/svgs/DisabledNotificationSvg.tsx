@@ -1,4 +1,4 @@
-export default function DisabledNotification({
+export default function DisabledNotificationSvg({
     className
 }: {
     className?: string

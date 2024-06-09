@@ -1,4 +1,4 @@
-export default function NewChat() {
+export default function NewChatSvg() {
     return (
         <svg
             viewBox="0 0 24 24"

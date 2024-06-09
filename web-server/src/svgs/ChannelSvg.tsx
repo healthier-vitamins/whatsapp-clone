@@ -1,4 +1,4 @@
-export default function Channel() {
+export default function ChannelSvg() {
     return (
         <svg
             viewBox="0 0 24 24"

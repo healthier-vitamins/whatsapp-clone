@@ -5,6 +5,7 @@ import CoreTextDropdown from '../../components/common/select/CoreTextDropdown'
 import dateConstant from '../../globals/date.constant'
 import useHistory from '../../hooks/common/useHistory'
 import { useLoginQuery } from '../../rtk-query/api/authentication.api'
+import LargeWhatsappSvg from '../../svgs/LargeWhatsappSvg'
 
 export default function LoginPage() {
     const [args, setArgs] = useState({ id: 's1111', name: 'heeyo' })
@@ -67,20 +68,36 @@ export default function LoginPage() {
     // }, [])
 
     return (
-        <div className=" flex h-screen w-screen flex-col">
-            <div className="h-[222px] min-h-[222px]  w-full bg-[#00a884]" />
-            <div className="h-full w-full bg-slate-100" />
-            <div className="absolute inset-y-0 z-[1] flex h-full w-full items-center justify-center">
-                <div className="h-full max-h-[950px] w-full max-w-[950px] bg-slate-200">
-                    <div className="flex h-full w-1/3 flex-col items-center ">
+        <div className=" min-w-screen z-0 flex h-full min-h-screen w-full flex-col justify-center bg-slate-100">
+            <div className="absolute inset-0 z-[1] h-[222px] min-h-[222px] w-full bg-[#00a884]" />
+
+            <div className="z-[2] flex h-[95px] w-full justify-center">
+                <div className="flex w-full max-w-[1000px] items-center">
+                    <LargeWhatsappSvg />
+                    <span className="ml-[14px] text-[14px] font-medium text-white">
+                        WHATSAPP WEB CLONE
+                    </span>
+                </div>
+            </div>
+
+            <div className="z-[2] flex h-full  w-full items-center justify-center ">
+                <div className="flex h-full w-full max-w-[1000px] flex-col rounded bg-white">
+                    {/* // TODO this min h is not working */}
+                    <div className="mb-[95px] flex h-full min-h-[1200px] w-1/3 flex-col items-center ">
+                        {/* <CoreTextDropdown
+                            options={[
+                                { description: '12345678', id: '1' },
+                                { description: '87654321', id: '2' }
+                            ]}
+                            onClick={(id) => console.log('selected id: ', id)}
+                            placeholder="Select a User"
+                        /> */}
                         <form>
-                            <label>Select a user</label>
                             <select>
-                                <option>ur muthter 1</option>
-                                <option>ur muthter 2</option>
+                                <option>test 1</option>
+                                <option>test 2</option>
                             </select>
                         </form>
-                        {/* <CoreTextDropdown placeholder="Select a User" /> */}
                     </div>
                 </div>
             </div>

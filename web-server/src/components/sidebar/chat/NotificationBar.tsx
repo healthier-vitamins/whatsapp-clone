@@ -1,6 +1,6 @@
-import ChevronRight from '../../../svgs/ChevronRight'
-import DisabledNotification from '../../../svgs/DisabledNotification'
-import WhiteCrossClose from '../../../svgs/WhiteCrossClose'
+import ChevronRightSvg from '../../../svgs/ChevronRightSvg'
+import DisabledNotification from '../../../svgs/DisabledNotificationSvg'
+import WhiteCrossCloseSvg from '../../../svgs/WhiteCrossCloseSvg'
 
 export default function NotificationBar() {
     return (
@@ -17,11 +17,11 @@ export default function NotificationBar() {
                     <span className=" text-sm text-[#111b21] hover:underline">
                         Turn on desktop notifications
                     </span>
-                    <ChevronRight className="ml-[2px] mt-[5.4px]" />
+                    <ChevronRightSvg className="ml-[2px] mt-[5.4px]" />
                 </div>
             </div>
             <div className="ml-auto">
-                <WhiteCrossClose className="cursor-pointer text-white" />
+                <WhiteCrossCloseSvg className="cursor-pointer text-white" />
             </div>
         </div>
     )

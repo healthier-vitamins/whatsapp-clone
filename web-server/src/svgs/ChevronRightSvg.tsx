@@ -1,4 +1,4 @@
-export default function ChevronRight({ className }: { className?: string }) {
+export default function ChevronRightSvg({ className }: { className?: string }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
