@@ -68,23 +68,23 @@ export default function LoginPage() {
     // }, [])
 
     return (
-        <div className=" min-w-screen z-0 flex h-full min-h-screen w-full flex-col justify-center bg-slate-100">
+        <div className="min-w-screen h-full min-h-screen w-full ">
             <div className="absolute inset-0 z-[1] h-[222px] min-h-[222px] w-full bg-[#00a884]" />
-
-            <div className="z-[2] flex h-[95px] w-full justify-center">
-                <div className="flex w-full max-w-[1000px] items-center">
-                    <LargeWhatsappSvg />
-                    <span className="ml-[14px] text-[14px] font-medium text-white">
-                        WHATSAPP WEB CLONE
-                    </span>
+            <div className="  z-0 flex h-full  w-full flex-col justify-center border border-red-600 bg-slate-100">
+                <div className="z-[2] flex h-[95px] w-full justify-center">
+                    <div className="flex w-full max-w-[1000px] items-center pl-[36px] lg:pl-0">
+                        <LargeWhatsappSvg />
+                        <span className="ml-[14px] text-[14px] font-medium text-white">
+                            WHATSAPP WEB CLONE
+                        </span>
+                    </div>
                 </div>
-            </div>
 
-            <div className="z-[2] flex h-full  w-full items-center justify-center ">
-                <div className="flex h-full w-full max-w-[1000px] flex-col rounded bg-white">
-                    {/* // TODO this min h is not working */}
-                    <div className="mb-[95px] flex h-full min-h-[1200px] w-1/3 flex-col items-center ">
-                        {/* <CoreTextDropdown
+                <div className="z-[2] flex h-full  w-full items-center justify-center ">
+                    <div className="flex h-full w-full max-w-[1000px] flex-col bg-white lg:rounded">
+                        {/* // TODO this min h is not working */}
+                        <div className="mb-[95px] flex h-full  w-1/3 flex-col items-center ">
+                            {/* <CoreTextDropdown
                             options={[
                                 { description: '12345678', id: '1' },
                                 { description: '87654321', id: '2' }
@@ -92,12 +92,15 @@ export default function LoginPage() {
                             onClick={(id) => console.log('selected id: ', id)}
                             placeholder="Select a User"
                         /> */}
-                        <form>
-                            <select>
-                                <option>test 1</option>
-                                <option>test 2</option>
-                            </select>
-                        </form>
+                            <form>
+                                <select>
+                                    <option className="rounded border-0 bg-slate-500 ring-0">
+                                        test 1
+                                    </option>
+                                    <option>test 2</option>
+                                </select>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
