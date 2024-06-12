@@ -2,8 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-    .btn-primary {
+@layer utilities {
+    /* .btn-primary {
         @apply rounded-full bg-violet-500 px-5 py-2 font-semibold text-white shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75;
+    } */
+
+    .core-textfield {
+        @apply placeholder:text-primary-placeholder-font-color text-primary-font-color h-[35px] max-h-[35px] w-full rounded-lg bg-[rgb(240,242,245)]  px-4 py-1 focus-visible:outline-none;
+    }
+
+    .core-dropdown-option {
+        @apply flex h-[35px] max-h-[35px] cursor-pointer items-center justify-start  border-b-[1px] border-b-gray-200 bg-slate-100 px-3 py-1 text-gray-500 hover:bg-slate-200;
     }
 }

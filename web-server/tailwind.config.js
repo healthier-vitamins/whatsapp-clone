@@ -5,21 +5,16 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'top-nav-icon': '#54656f'
+                'top-nav-icon': '#54656f',
+                'primary-font-color': '#3b4a54',
+                'primary-placeholder-font-color': 'rgb(107, 114, 128)',
+
+                'textfield-height': '35px'
             }
         },
         fontFamily: {
             display: ['sans serif'],
             body: ['sans serif']
         }
-        // extend: {
-        //     spacing: {
-        //         '8xl': '96rem',
-        //         '9xl': '128rem'
-        //     },
-        //     borderRadius: {
-        //         '4xl': '2rem'
-        //     }
-        // }
     }
 }

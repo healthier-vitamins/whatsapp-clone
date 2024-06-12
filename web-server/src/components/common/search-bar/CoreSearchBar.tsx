@@ -30,10 +30,10 @@ export default function CoreSearchBar({
                 </div>
             </div> */}
             <label className="relative block w-full">
-                <SearchSvg className="absolute left-4 top-[10px] h-4 w-4 text-[#3b4a54]" />
+                <SearchSvg className="text-primary-font-color absolute left-4 top-[10px] h-4 w-4" />
                 <input
                     placeholder={placeholderText}
-                    className="h-[35px] w-full rounded-lg bg-[rgb(240,242,245)] py-1 pl-12 pr-4 text-[#3b4a54] placeholder:text-gray-500 focus:outline-none"
+                    className="core-textfield  !pl-12  focus:outline-none  "
                 ></input>
             </label>
         </div>
