@@ -1,4 +1,4 @@
-export default function ChevronDownSvg({ className }: { className?: string }) {
+export default function ChevronUpSvg({ className }: { className?: string }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +11,7 @@ export default function ChevronDownSvg({ className }: { className?: string }) {
             <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                d="m4.5 15.75 7.5-7.5 7.5 7.5"
             />
         </svg>
     )

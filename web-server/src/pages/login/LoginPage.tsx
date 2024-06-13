@@ -1,71 +1,29 @@
-import { skipToken } from '@reduxjs/toolkit/query'
-import moment from 'moment'
-import { useState } from 'react'
 import CoreTextDropdown from '../../components/common/select/CoreTextDropdown'
-import dateConstant from '../../globals/date.constant'
-import useHistory from '../../hooks/common/useHistory'
-import { useLoginQuery } from '../../rtk-query/api/authentication.api'
+import apiContacts from '../../rtk-query/api/contacts.api'
 import LargeWhatsappSvg from '../../svgs/LargeWhatsappSvg'
 
 export default function LoginPage() {
-    const [args, setArgs] = useState({ id: 's1111', name: 'heeyo' })
-    // const test = true
-    // if (test) customHistory.block(() => {})
+    const { data, error } = apiContacts.useGetAllQuery(undefined, {
+        pollingInterval: 600000
+    })
 
-    useHistory()
-
-    const {
-        isError,
-        isLoading,
-        fulfilledTimeStamp,
-        startedTimeStamp,
-        data,
-        error,
-        currentData,
-        refetch,
-        originalArgs,
-        isUninitialized,
-        isFetching,
-        isSuccess,
-        requestId,
-        endpointName
-    } = useLoginQuery(false ? skipToken : args, {})
-
-    console.log('============= start ==================')
-    console.log('isError: ', isError)
-    console.log('isLoading: ', isLoading)
-    console.log(
-        'fulfilledTimeStamp: ',
-        moment(fulfilledTimeStamp).format(dateConstant.DATE_WITH_TIME)
-    )
-
-    console.log(
-        'startedTimeStamp: ',
-        moment(startedTimeStamp).format(dateConstant.DATE_WITH_TIME)
-    )
-    console.log('error: ', error)
-    console.log('isSuccess: ', isSuccess)
-    console.log('requestId: ', requestId)
-    console.log('isFetching: ', isFetching)
-    console.log('currentData: ', currentData)
-    console.log('originalArgs: ', originalArgs)
-    console.log('endpointName: ', endpointName)
-    console.log('============= end ==================')
-
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         if (!isUninitialized) refetch()
-    //     }, 500)
-    // }, [])
-
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setArgs({
-    //             id: 's2222',
-    //             name: 'byee'
-    //         })
-    //     }, 1000)
-    // }, [])
+    console.log(data)
+    // const {
+    //     isError,
+    //     isLoading,
+    //     fulfilledTimeStamp,
+    //     startedTimeStamp,
+    //     data,
+    //     error,
+    //     currentData,
+    //     refetch,
+    //     originalArgs,
+    //     isUninitialized,
+    //     isFetching,
+    //     isSuccess,
+    //     requestId,
+    //     endpointName
+    // } = useLoginQuery(false ? skipToken : args, {})
 
     return (
         <div className="min-w-screen h-full min-h-screen w-full ">
@@ -93,14 +51,13 @@ export default function LoginPage() {
                             placeholder="Select a User"
                         /> */}
                             <CoreTextDropdown
+                                idKey="id"
                                 className={`w-2 max-w-2`}
                                 onClick={(id) =>
                                     console.log('selected id:', id)
                                 }
-                                options={[
-                                    { description: '12345678', id: '1' },
-                                    { description: '87654321', id: '2' }
-                                ]}
+                                options={data ? data : []}
+                                displayKey={'username'}
                             />
                         </div>
                     </div>

@@ -5,7 +5,7 @@ export default function ErrorPage(props?: ErrorBoundaryState) {
     // ? to be used with react router
     // const error: any = useRouteError()
 
-    // ! Functions
+    // -- Functions
     function renderErrorInfo() {
         if (isDevelopment() && props && props.error)
             return (

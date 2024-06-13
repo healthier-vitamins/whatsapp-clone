@@ -1,47 +1,49 @@
 import { useEffect, useRef, useState } from 'react'
 import ChevronDownSvg from '../../../svgs/ChevronDownSvg'
 import classNames from '../../../utilities/tailwind/classNames'
+import ChevronUpSvg from '../../../svgs/ChevronUpSvg'
 
-interface ICoreOptions {
-    id: string
-    description: string
-}
-
-type CoreOptionsType = ICoreOptions[]
-
-export default function CoreTextDropdown({
+export default function CoreTextDropdown<T>({
     placeholder = 'Please choose an option',
     onClick,
     options,
-    className
+    className,
+    displayKey,
+    idKey
 }: {
     placeholder?: string
-    onClick: (id: string) => void
-    options: CoreOptionsType
+    onClick: (option: T) => void
+    options: T[]
+    displayKey: keyof T
+    idKey: keyof T
     className?: string
 }) {
-    // ! Use States
-    const [selectedOption, setSelectedOption] = useState<string>('')
+    // -- Use States
+    const [selectedOption, setSelectedOption] = useState<T>()
     const [openDropdown, setOpenDropdown] = useState(false)
 
-    // ! Refs
+    // -- Refs
     const dropdownRef = useRef<HTMLDivElement>(null)
 
-    // ! Functions
-    function handleChange(id: string) {
-        onClick(id)
-        setSelectedOption(id)
+    // -- Functions
+    function handleChange(option: T) {
+        onClick(option)
+        setSelectedOption(option)
         setOpenDropdown(false)
     }
 
     function renderValue() {
-        const selected = options.find((option) => option.id == selectedOption)
-        if (selected?.description) return selected?.description
-
+        if (selectedOption && selectedOption[idKey]) {
+            const selected = options.find(
+                (option) => option[idKey] == selectedOption[idKey]
+            )
+            if (selected && selected[displayKey])
+                return selected[displayKey] as unknown as string
+        }
         return placeholder
     }
 
-    // ! Use Effects
+    // -- Use Effects
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (
@@ -65,37 +67,55 @@ export default function CoreTextDropdown({
         >
             <button
                 className="core-textfield"
-                value={selectedOption}
+                value={
+                    selectedOption
+                        ? (selectedOption[displayKey] as unknown as string)
+                        : ''
+                }
                 onClick={(e) => {
                     e.preventDefault()
                     setOpenDropdown((prev) => !prev)
                 }}
             >
                 {renderValue()}
+                {openDropdown ? (
+                    <ChevronUpSvg className="ml-auto h-4 w-4" />
+                ) : (
+                    <ChevronDownSvg className="ml-auto h-4 w-4" />
+                )}
             </button>
+
             {openDropdown && (
                 <ul className="absolute top-[39px] min-w-full">
                     <li
-                        className="core-dropdown-option !cursor-default rounded-t-lg !bg-slate-50 "
+                        className="core-dropdown-option !cursor-default rounded-t-lg !bg-gray-50 !text-gray-400"
                         value={''}
                     >
                         {placeholder}
                     </li>
                     {options.map((option, index) => {
-                        const selected = options.find(
-                            (option) => option.id == selectedOption
-                        )
+                        let selected = undefined
+                        if (selectedOption && selectedOption[idKey]) {
+                            selected = options.find(
+                                (option) =>
+                                    option[idKey] == selectedOption[idKey]
+                            )
+                        }
+
                         return (
                             <li
+                                key={index}
                                 className={`core-dropdown-option ${classNames(
                                     index == options.length - 1
                                         ? 'rounded-b-lg !border-b-0'
                                         : ''
-                                )} ${classNames(selected?.description ? 'bg-slate-500' : '')}`}
-                                value={option.id}
-                                onClick={() => handleChange(option.id)}
+                                )} ${classNames(selected && selected[idKey] == option[idKey] ? '!bg-slate-200' : '')}`}
+                                value={option[idKey] as string}
+                                onClick={() => handleChange(option)}
                             >
-                                {option.description}
+                                {option && option[displayKey]
+                                    ? (option[displayKey] as unknown as string)
+                                    : ''}
                             </li>
                         )
                     })}
