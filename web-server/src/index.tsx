@@ -34,9 +34,11 @@ function renderComponent(route: IRoute) {
                 )}
             </UnProtectedWrapper>
         )
-    } else {
-        return <></>
     }
+
+    if (route.permissions.length > 0)
+        return <ProtectedWrapper>{null}</ProtectedWrapper>
+    return <UnProtectedWrapper>{null}</UnProtectedWrapper>
 }
 
 function renderOverlay(

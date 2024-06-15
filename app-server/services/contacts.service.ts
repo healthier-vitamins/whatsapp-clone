@@ -2,16 +2,16 @@ import { PrismaClient } from '@prisma/client'
 import ErrorResponse from '../utilities/ErrorResponse'
 import { StatusCodes } from 'http-status-codes'
 
-export default class ContactService {
+class ContactService {
     private prisma: PrismaClient
 
     constructor() {
         this.prisma = new PrismaClient()
     }
 
-    async getAll() {
+    async getAll(loggedInId: string) {
         return this.prisma.user
-            .findMany()
+            .findMany({ where: { id: { not: loggedInId } } })
             .then((res) => res)
             .catch((err) => {
                 console.log(err)
@@ -23,3 +23,6 @@ export default class ContactService {
             .finally(async () => await this.prisma.$disconnect())
     }
 }
+
+const contactService = new ContactService()
+export default contactService

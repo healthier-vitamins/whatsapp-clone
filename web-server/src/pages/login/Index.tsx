@@ -14,7 +14,7 @@ export default function LoginPage() {
 
     // -- Use Queries
     const { data: contactsData, error } = apiContacts.useGetAllQuery(
-        undefined,
+        { id: undefined },
         {
             pollingInterval: 600000
         }

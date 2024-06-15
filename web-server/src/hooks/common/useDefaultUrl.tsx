@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import allRoutes from '../../utilities/routes.utility'
+import { useLocation } from 'react-router-dom'
 import customHistory from '../../components/router/CustomHistory'
+import allRoutes from '../../utilities/routes.utility'
 
 export default function useDefaultUrl(dependencies = []) {
     // -- Location
@@ -9,6 +9,7 @@ export default function useDefaultUrl(dependencies = []) {
 
     // -- Use Effects
     useEffect(() => {
-        if (location.pathname === '/') customHistory.push(allRoutes.CHATS.url)
+        console.log(location.pathname)
+        if (location.pathname === '/') customHistory.push(allRoutes.LOGIN.url)
     }, [location.pathname])
 }

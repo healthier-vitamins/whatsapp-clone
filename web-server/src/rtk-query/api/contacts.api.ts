@@ -8,7 +8,7 @@ const apiContacts = createApi({
         baseUrl: 'http://localhost:3001/api/contact'
     }),
     endpoints: (build) => ({
-        getAll: build.query<IContact[], undefined>({
+        getAll: build.query<IContact[], Partial<Pick<IContact, 'id'>>>({
             providesTags: (result, error, id) => {
                 console.log('result: ', result)
                 console.log('error: ', error)
@@ -25,9 +25,10 @@ const apiContacts = createApi({
                 console.log('error res: ', response)
                 return response.data
             },
-            query: () => ({
+            query: (payload) => ({
                 url: `get-all`,
-                method: 'GET'
+                method: 'GET',
+                params: payload
             })
         })
     })
