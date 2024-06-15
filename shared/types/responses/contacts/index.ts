@@ -1,4 +1,4 @@
-export interface IGetAllContacts {
+export interface IContact {
     id: string
     username: string
     passwordHash: string

@@ -1,5 +1,5 @@
-import ChatPage from '../pages/chat/ChatPage'
-import LoginPage from '../pages/login/LoginPage'
+import ChatPage from '../pages/chat/Index'
+import LoginPage from '../pages/login/Index'
 
 interface Route {
     url: string

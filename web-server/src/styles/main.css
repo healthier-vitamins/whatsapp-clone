@@ -8,10 +8,18 @@
     } */
 
     .core-textfield {
-        @apply placeholder:text-primary-placeholder-font-color text-primary-font-color flex h-[35px] max-h-[35px] w-full items-center justify-center rounded-lg bg-[rgb(240,242,245)] px-4 py-1 focus-visible:outline-none;
+        @apply flex h-[35px] max-h-[35px] w-full items-center justify-center rounded-lg bg-[rgb(240,242,245)] px-4 py-1 text-primary-font-color placeholder:text-primary-placeholder-font-color focus-visible:outline-none;
     }
 
     .core-dropdown-option {
         @apply flex h-[35px] max-h-[35px] cursor-pointer items-center justify-center border-b-[1px] border-b-gray-200 bg-slate-100 px-3 py-1 text-gray-500 hover:bg-slate-200;
+    }
+
+    .secondary-background {
+        @apply bg-slate-100;
+    }
+
+    .primary-background {
+        @apply bg-[#00a884];
     }
 }

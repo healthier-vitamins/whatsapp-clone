@@ -2,10 +2,13 @@ import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit'
 import apiAuthentication from '../rtk-query/api/authentication.api'
 import { miscSlice } from './reducers/misc.reducer'
 import apiContacts from '../rtk-query/api/contacts.api'
+import { setupListeners } from '@reduxjs/toolkit/query'
+import { authenticationSlice } from './reducers/authentication.reducer'
 
 const store = configureStore({
     reducer: {
         misc: miscSlice.reducer,
+        authentication: authenticationSlice.reducer,
         [apiAuthentication.reducerPath]: apiAuthentication.reducer,
         [apiContacts.reducerPath]: apiContacts.reducer
     },
@@ -26,3 +29,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
     unknown,
     Action<string>
 >
+
+// optional, but required for refetchOnFocus/refetchOnReconnect behaviors
+// see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
+setupListeners(store.dispatch)

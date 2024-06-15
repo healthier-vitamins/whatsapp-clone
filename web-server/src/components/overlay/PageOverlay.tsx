@@ -12,11 +12,11 @@ export default function PageOverlay({
         <div className="h-screen w-screen overflow-hidden">
             <div className="flex h-full w-full flex-col">
                 {/* // copied green background colour from whatsapp */}
-                <div className=" z-0 h-[151px] w-full bg-[#00a884] " />
-                <div className=" z-[1] h-full w-full  bg-gray-200" />
+                <div className=" primary-background z-0 h-[151px] w-full " />
+                <div className=" secondary-background z-[1] h-full  w-full" />
             </div>
             <div className="absolute inset-y-0 z-[2] flex h-full w-full items-center justify-center xl:p-4">
-                <div className="h-full xl:max-h-[1235px] w-full xl:max-w-[1700px]">
+                <div className="h-full w-full xl:max-h-[1235px] xl:max-w-[1700px]">
                     {children}
                 </div>
             </div>

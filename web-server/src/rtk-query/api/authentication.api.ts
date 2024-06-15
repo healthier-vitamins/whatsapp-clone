@@ -1,13 +1,8 @@
 // Need to use the React-specific entry point to allow generating React hooks
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IContact } from '../../../../shared/types/responses/contacts'
 
-/**
- * @type LoginReqArgs
- */
-export type LoginReqArgs = {
-    id: string | undefined
-    name: string | undefined
-}
+type LoginReqType = Pick<IContact, 'id' | 'username'>
 
 // function providesList<R extends { id: string | number }[], T extends string>(
 //     resultsWithIds: R | undefined,
@@ -28,7 +23,7 @@ const apiAuthentication = createApi({
         baseUrl: 'http://localhost:3001/api/authentication'
     }),
     endpoints: (build) => ({
-        login: build.query<string, LoginReqArgs>({
+        login: build.query<string, LoginReqType>({
             providesTags: (result, error, id) => {
                 console.log('result: ', result)
                 console.log('error: ', error)
@@ -83,11 +78,11 @@ const apiAuthentication = createApi({
             //     //   }
             //     return { data: '' }
             // }
-            query: ({ id, name }) => ({
+            query: ({ id, username }) => ({
                 url: `login`,
                 method: 'POST',
-                body: { id: id, name: name },
-                params: { id: id, name: name }
+                body: { id: id, name: username },
+                params: { id: id, name: username }
             })
         })
         // testUpdate: build.mutation

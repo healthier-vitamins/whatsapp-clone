@@ -9,7 +9,8 @@ export default function CoreTextDropdown<T>({
     options,
     className,
     displayKey,
-    idKey
+    idKey,
+    fullWidth = false
 }: {
     placeholder?: string
     onClick: (option: T) => void
@@ -17,6 +18,7 @@ export default function CoreTextDropdown<T>({
     displayKey: keyof T
     idKey: keyof T
     className?: string
+    fullWidth?: boolean
 }) {
     // -- Use States
     const [selectedOption, setSelectedOption] = useState<T>()
@@ -63,7 +65,7 @@ export default function CoreTextDropdown<T>({
     return (
         <div
             ref={dropdownRef}
-            className={`relative flex w-full min-w-full items-center justify-start ${className}`}
+            className={`${fullWidth && 'w-full min-w-full max-w-full'} relative flex items-center justify-start ${className}`}
         >
             <button
                 className="core-textfield"
