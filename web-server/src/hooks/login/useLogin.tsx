@@ -4,18 +4,16 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import reducerAuthentication from '../../redux/reducers/authentication.reducer'
 import allRoutes from '../../utilities/routes.utility'
 import { useEffect } from 'react'
+import customHistory from '../../components/router/CustomHistory'
 
 export default function useLogin() {
-    // -- Location
-    const navigate = useNavigate()
-
     // -- Redux
     const dispatch = useAppDispatch()
     const { loggedInUser } = useAppSelector((state) => state.authentication)
 
     // -- Use Effect
     useEffect(() => {
-        if (loggedInUser) navigate(allRoutes.CHATS.url)
+        if (loggedInUser) customHistory.push(allRoutes.CHATS.url)
     }, [loggedInUser])
 
     // -- Functions
