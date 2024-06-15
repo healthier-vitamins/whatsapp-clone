@@ -1,36 +1,41 @@
-import ChatPage from '../pages/chat/Index'
+import OverallLayout from '../components/layout/OverallLayout'
+import WholePageLayout from '../pages/chat/Index'
 import LoginPage from '../pages/login/Index'
 
-interface Route {
+export interface IRoute {
     url: string
-    permissions: number[][]
+    permissions: number[]
     component: React.ComponentType | undefined
     pageTitle: string
+    overlay: boolean
 }
 
-type Urls = 'DEFAULT' | 'CHATS' | 'LOGIN'
-type AllRoutes = {
-    [key in Urls]: Route
+type UrlKeysType = 'DEFAULT' | 'CHATS' | 'LOGIN'
+type AllRoutesType = {
+    [key in UrlKeysType]: IRoute
 }
 
-const allRoutes: AllRoutes = {
+const allRoutes: AllRoutesType = {
     DEFAULT: {
         component: undefined,
         pageTitle: 'Whatsapp-Clone',
         permissions: [],
-        url: '/'
+        url: '/',
+        overlay: false
     },
     CHATS: {
-        component: ChatPage,
+        component: OverallLayout,
         pageTitle: '',
-        permissions: [],
-        url: '/chats'
+        permissions: [0],
+        url: '/chats',
+        overlay: true
     },
     LOGIN: {
         component: LoginPage,
         pageTitle: '',
         permissions: [],
-        url: '/login'
+        url: '/login',
+        overlay: false
     }
 }
 

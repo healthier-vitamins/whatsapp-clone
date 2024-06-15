@@ -12,7 +12,7 @@ export default function TopNav() {
     const changeTopNavButton = useChangeTopNavButtonState()
 
     return (
-        <div className="flex h-[59px] max-w-full border-r-[1px] border-r-[#e9edef] bg-[#f0f2f5] px-4 py-[10px]">
+        <div className="flex h-[59px] max-w-full bg-[#f0f2f5] px-4 py-[10px]">
             <UserCircleIcon className="h-10 w-10 cursor-pointer text-gray-300" />
             <div className="ml-auto flex items-center gap-[10px]">
                 <div className={BUTTON_CLASS}>

@@ -9,7 +9,7 @@ export default function NewChatSidebar() {
 
     return (
         <div className="flex w-full flex-col">
-            <div className="flex h-[108px] flex-col justify-end bg-[#008069]">
+            <div className="flex h-[114.5px] flex-col justify-end bg-[#008069]">
                 <div className="flex items-center pb-4 pl-[23px]">
                     <BackButtonSvg
                         className="cursor-pointer"

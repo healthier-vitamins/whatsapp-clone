@@ -1,32 +1,50 @@
 import { createRoot } from 'react-dom/client'
-import {
-    Outlet,
-    Route,
-    RouterProvider,
-    Routes,
-    createBrowserRouter,
-    createRoutesFromElements
-} from 'react-router-dom'
-import ErrorPage from './pages/errors/ErrorPage'
+import { Route, Routes } from 'react-router-dom'
 import './styles/main.css'
 
 import React from 'react'
 import { Provider } from 'react-redux'
+import ErrorBoundary from './components/errors/ErrorBoundary'
+import PageOverlay from './components/overlay/PageOverlay'
+import ProtectedWrapper from './components/rbac/ProtectedWrapper'
 import UnProtectedWrapper from './components/rbac/UnProtectedWrapper'
-import store from './redux/store'
-import allRoutes from './utilities/routes.utility'
-import NotFoundPage from './pages/errors/NotFoundPage'
 import CustomRouter from './components/router/CustomBrowserRouter'
 import customHistory from './components/router/CustomHistory'
-import ProtectedWrapper from './components/rbac/ProtectedWrapper'
-import ErrorBoundary from './components/errors/ErrorBoundary'
+import NotFoundPage from './pages/errors/NotFoundPage'
+import store from './redux/store'
+import allRoutes, { IRoute } from './utilities/routes.utility'
 
-function renderComponent(component: React.ComponentType | undefined) {
-    if (component) {
-        return React.createElement(component)
+function renderComponent(route: IRoute) {
+    if (route.component) {
+        if (route.permissions.length > 0) {
+            return (
+                <ProtectedWrapper>
+                    {renderOverlay(
+                        React.createElement(route.component),
+                        route.overlay
+                    )}
+                </ProtectedWrapper>
+            )
+        }
+        return (
+            <UnProtectedWrapper>
+                {renderOverlay(
+                    React.createElement(route.component),
+                    route.overlay
+                )}
+            </UnProtectedWrapper>
+        )
     } else {
         return <></>
     }
+}
+
+function renderOverlay(
+    element: React.ReactElement,
+    overlay: IRoute['overlay']
+) {
+    if (overlay) return <PageOverlay children={element} />
+    return <>{element}</>
 }
 
 // ? to be used with react router
@@ -70,30 +88,18 @@ root.render(
         <CustomRouter history={customHistory}>
             <ErrorBoundary>
                 <Routes>
-                    {/* <Route
-                    path={allRoutes.DEFAULT.url}
-                    element={
-                        <UnProtectedWrapper>
-                            <Outlet />
-                        </UnProtectedWrapper>
-                    }
-                /> */}
+                    <Route
+                        path={allRoutes.DEFAULT.url}
+                        element={<>{renderComponent(allRoutes.DEFAULT)}</>}
+                    />
                     <Route
                         path={allRoutes.CHATS.url}
-                        element={
-                            <ProtectedWrapper>
-                                {renderComponent(allRoutes.CHATS.component)}
-                            </ProtectedWrapper>
-                        }
+                        element={<>{renderComponent(allRoutes.CHATS)}</>}
                     ></Route>
 
                     <Route
                         path={allRoutes.LOGIN.url}
-                        element={
-                            <UnProtectedWrapper>
-                                {renderComponent(allRoutes.LOGIN.component)}
-                            </UnProtectedWrapper>
-                        }
+                        element={<>{renderComponent(allRoutes.LOGIN)}</>}
                     ></Route>
 
                     <Route

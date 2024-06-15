@@ -4,6 +4,7 @@ import CoreTextDropdown from '../../components/common/select/CoreTextDropdown'
 import useLogin from '../../hooks/login/useLogin'
 import apiContacts from '../../rtk-query/api/contacts.api'
 import TopHeader from './TopHeader'
+import CorePrimaryButton from '../../components/common/button/CorePrimaryButton'
 
 export default function LoginPage() {
     // -- Use States
@@ -18,7 +19,6 @@ export default function LoginPage() {
             pollingInterval: 600000
         }
     )
-
     // -- Hooks
     const loginHook = useLogin()
 
@@ -51,21 +51,25 @@ export default function LoginPage() {
                 <div className="z-[2] flex h-full  w-full items-center justify-center">
                     <div className="mb-[95px] flex  h-[760px] min-h-[760px] w-[1000px]  bg-white lg:rounded">
                         <div className=" flex h-full min-h-full w-[40%] flex-col items-center border border-red-400 ">
-                            <div className=" h-40 "></div>
-                            <CoreTextDropdown
-                                idKey="id"
-                                className={`w-60 max-w-60`}
-                                onClick={(selectedOption) =>
-                                    setSelectedUser(selectedOption)
-                                }
-                                options={contactsData ? contactsData : []}
-                                displayKey={'username'}
-                            />
-                            <button
-                                onClick={() => loginHook.onClick(selectedUser)}
-                            >
-                                Login
-                            </button>
+                            <div className="mt-60">
+                                <CoreTextDropdown
+                                    idKey="id"
+                                    className={`w-60 max-w-60`}
+                                    onClick={(selectedOption) =>
+                                        setSelectedUser(selectedOption)
+                                    }
+                                    options={contactsData ? contactsData : []}
+                                    displayKey={'username'}
+                                />
+                            </div>
+                            <div className="mt-6">
+                                <CorePrimaryButton
+                                    buttonText="Login"
+                                    onClick={() =>
+                                        loginHook.onClick(selectedUser)
+                                    }
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,16 +1,19 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store'
+import { IContact } from '../../../../shared/types/responses/contacts'
 
 export type TopNavButtonStateType = 'NEW_CHAT' | undefined
 
 interface MiscState {
     initialUrl: string
     topNavButtonState: TopNavButtonStateType
+    rightPageChat: Partial<IContact> | undefined
 }
 
 const initialState: MiscState = {
     initialUrl: '',
-    topNavButtonState: undefined
+    topNavButtonState: undefined,
+    rightPageChat: undefined
 }
 
 export const miscSlice = createSlice({
@@ -26,6 +29,12 @@ export const miscSlice = createSlice({
             action: PayloadAction<TopNavButtonStateType>
         ) => {
             state.topNavButtonState = action.payload
+        },
+        setRightPageChat: (
+            state,
+            action: PayloadAction<Partial<IContact> | undefined>
+        ) => {
+            state.rightPageChat = action.payload
         }
     }
 })

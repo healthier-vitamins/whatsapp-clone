@@ -13,4 +13,6 @@ export default function useHistory() {
             unlisten()
         }
     }, [])
+
+    // customHistory.block(() => window.alert('blocked'))
 }
