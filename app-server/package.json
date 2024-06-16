@@ -2,7 +2,7 @@
     "name": "app-server",
     "version": "1.0.0",
     "main": "index.js",
-    "repository": "https://github.com/healthier-vitamins/bmc-frontend.git",
+    "repository": "https://github.com/healthier-vitamins/whatsapp-clone.git",
     "author": "healthy-vitamins <cheeaudrian97@gmail.com>",
     "license": "MIT",
     "scripts": {
