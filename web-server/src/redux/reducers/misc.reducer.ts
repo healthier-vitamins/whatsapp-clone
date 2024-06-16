@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 import { IContact } from '../../../../shared/types/responses/contacts'
 
-export type TopNavButtonStateType = 'NEW_CHAT' | undefined
+export type TopNavButtonStateType = 'NEW_CHAT' | 'DEFAULT'
 
 interface MiscState {
     initialUrl: string
@@ -12,7 +12,7 @@ interface MiscState {
 
 const initialState: MiscState = {
     initialUrl: '',
-    topNavButtonState: undefined,
+    topNavButtonState: 'DEFAULT',
     rightPageChat: undefined
 }
 

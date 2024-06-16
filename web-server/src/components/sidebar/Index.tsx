@@ -9,7 +9,7 @@ export default function SidebarContainer() {
 
     useHistory()
 
-    if (!miscSelector.topNavButtonState) {
+    if (miscSelector.topNavButtonState === 'DEFAULT') {
         return <ChatSidebar />
     } else if (miscSelector.topNavButtonState === 'NEW_CHAT') {
         return <NewChatSidebar />

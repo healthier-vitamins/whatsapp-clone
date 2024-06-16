@@ -11,15 +11,13 @@ export default function OverallLayout() {
             <div className="h-full w-full max-w-[450px]">
                 <SidebarContainer />
             </div>
-            <div className="secondary-background h-full w-full border-l-[1px] border-l-[#e9edef]">
-                <div className="flex flex-col items-center">
-                    <div className="mt-72 flex flex-col items-center">
-                        <WhatsappLaptopImg />
+            <div className="bg-secondary-background border-l-primary-border-color h-full w-full border-l-[1px]">
+                <div className="flex h-full flex-col items-center justify-center">
+                    <WhatsappLaptopImg />
 
-                        <span className="mt-4 text-3xl font-normal text-[#41525d]">
-                            Welcome to Whatsapp Web Clone :)
-                        </span>
-                    </div>
+                    <span className="mt-4 text-3xl font-normal text-[#41525d]">
+                        Welcome to Whatsapp Web Clone :)
+                    </span>
                 </div>
             </div>
         </div>

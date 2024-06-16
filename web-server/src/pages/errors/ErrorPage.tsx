@@ -22,7 +22,7 @@ export default function ErrorPage(props?: ErrorBoundaryState) {
     }
 
     return (
-        <div className="secondary-background flex h-screen w-screen flex-col items-center justify-center">
+        <div className="bg-secondary-background flex h-screen w-screen flex-col items-center justify-center">
             <h1 className="mb-1 text-4xl font-medium">Oops!</h1>
             <span className="text-base">An unexpected error has occurred.</span>
             {renderErrorInfo()}

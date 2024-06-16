@@ -13,6 +13,7 @@ import customHistory from './components/router/CustomHistory'
 import NotFoundPage from './pages/errors/NotFoundPage'
 import store from './redux/store'
 import allRoutes, { IRoute } from './utilities/routes.utility'
+import { CookiesProvider } from 'react-cookie'
 
 function renderComponent(route: IRoute) {
     if (route.component) {
@@ -85,35 +86,37 @@ function renderOverlay(
 const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
 root.render(
-    <Provider store={store}>
-        {/* <RouterProvider router={router} /> */}
-        <CustomRouter history={customHistory}>
-            <ErrorBoundary>
-                <Routes>
-                    <Route
-                        path={allRoutes.DEFAULT.url}
-                        element={<>{renderComponent(allRoutes.DEFAULT)}</>}
-                    />
-                    <Route
-                        path={allRoutes.CHATS.url}
-                        element={<>{renderComponent(allRoutes.CHATS)}</>}
-                    ></Route>
+    <CookiesProvider>
+        <Provider store={store}>
+            {/* <RouterProvider router={router} /> */}
+            <CustomRouter history={customHistory}>
+                <ErrorBoundary>
+                    <Routes>
+                        <Route
+                            path={allRoutes.DEFAULT.url}
+                            element={<>{renderComponent(allRoutes.DEFAULT)}</>}
+                        />
+                        <Route
+                            path={allRoutes.CHATS.url}
+                            element={<>{renderComponent(allRoutes.CHATS)}</>}
+                        ></Route>
 
-                    <Route
-                        path={allRoutes.LOGIN.url}
-                        element={<>{renderComponent(allRoutes.LOGIN)}</>}
-                    ></Route>
+                        <Route
+                            path={allRoutes.LOGIN.url}
+                            element={<>{renderComponent(allRoutes.LOGIN)}</>}
+                        ></Route>
 
-                    <Route
-                        path="*"
-                        element={
-                            <UnProtectedWrapper>
-                                <NotFoundPage />
-                            </UnProtectedWrapper>
-                        }
-                    />
-                </Routes>
-            </ErrorBoundary>
-        </CustomRouter>
-    </Provider>
+                        <Route
+                            path="*"
+                            element={
+                                <UnProtectedWrapper>
+                                    <NotFoundPage />
+                                </UnProtectedWrapper>
+                            }
+                        />
+                    </Routes>
+                </ErrorBoundary>
+            </CustomRouter>
+        </Provider>
+    </CookiesProvider>
 )

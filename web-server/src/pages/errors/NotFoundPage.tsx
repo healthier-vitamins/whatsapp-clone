@@ -10,7 +10,7 @@ export default function NotFoundPage() {
     useHistory()
 
     return (
-        <div className="secondary-background flex h-dvh w-screen flex-col items-center justify-center">
+        <div className="bg-secondary-background flex h-dvh w-screen flex-col items-center justify-center">
             <h1 className="mb-1 text-4xl font-medium">Page not found</h1>
             <span className="cursor-default text-base">
                 Click&nbsp;

@@ -13,7 +13,7 @@ export default function NewChatSidebar() {
                 <div className="flex items-center pb-4 pl-[23px]">
                     <BackButtonSvg
                         className="cursor-pointer"
-                        onClick={() => changeTopNavButton.onClick(undefined)}
+                        onClick={() => changeTopNavButton.onClick('DEFAULT')}
                     />
                     <span className="ml-6 text-[19px] font-medium text-white">
                         New Chat

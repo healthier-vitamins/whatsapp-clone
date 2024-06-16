@@ -7,7 +7,7 @@ export default function CorePrimaryButton({
 }) {
     return (
         <button
-            className="primary-background rounded-lg px-4 py-1 font-medium text-white"
+            className="bg-primary-background rounded-lg px-4 py-1 font-medium text-white"
             onClick={onClick}
         >
             {buttonText}
