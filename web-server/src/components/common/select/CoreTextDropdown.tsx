@@ -68,7 +68,7 @@ export default function CoreTextDropdown<T>({
             className={`${fullWidth && 'w-full min-w-full max-w-full'} relative flex items-center justify-start ${className}`}
         >
             <button
-                className="core-textfield"
+                className="core-secondary-textfield"
                 value={
                     selectedOption
                         ? (selectedOption[displayKey] as unknown as string)

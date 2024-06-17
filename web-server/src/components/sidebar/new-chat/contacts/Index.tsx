@@ -3,8 +3,8 @@ import useLogin from '../../../../hooks/login/useLogin'
 import { useAppDispatch } from '../../../../redux/hooks'
 import reducerMisc from '../../../../redux/reducers/misc.reducer'
 import apiContacts from '../../../../rtk-query/api/contacts.api'
-import ContactTab from './ContactTab'
-import ContactsDivider from './ContactsDivider'
+import CoreTab from '../../../common/tab/CoreTab'
+import Divider from '../../Divider'
 import GroupTab from './GroupTab'
 
 export default function ContactsContainer() {
@@ -29,14 +29,23 @@ export default function ContactsContainer() {
         return data?.map((contact) => {
             return (
                 <>
-                    <ContactTab
-                        contact={contact}
-                        onClick={(selectedUser) => {
-                            dispatch(reducerMisc.setRightPageChat(selectedUser))
+                    <CoreTab
+                        primaryText={contact.username}
+                        secondaryText={contact.status}
+                        option={contact}
+                        onClick={(selectedOption) => {
+                            dispatch(
+                                reducerMisc.setRightPageChat(selectedOption)
+                            )
+                            dispatch(
+                                reducerMisc.setLeftPageSelectedChat(
+                                    selectedOption
+                                )
+                            )
                             changeTopNavButton.onClick('DEFAULT')
                         }}
                     />
-                    <ContactsDivider />
+                    <Divider />
                 </>
             )
         })
@@ -45,18 +54,17 @@ export default function ContactsContainer() {
     return (
         <div className="flex-col">
             <GroupTab text="New group" type="COMMUNITY_GRP" />
-            <ContactsDivider />
+            <Divider />
             <GroupTab text="New Community" type="GRP" />
-            <ContactsDivider />
+            <Divider />
 
             <div className=" h-[72px]  bg-white py-[30px] pl-8">
                 <span className="text-primary-background  text-base font-normal">
                     CONTACTS ON WHATSAPP
                 </span>
             </div>
-            <ContactsDivider />
+            <Divider />
             {renderContacts()}
-            <ContactsDivider />
         </div>
     )
 }

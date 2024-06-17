@@ -8,12 +8,14 @@ interface MiscState {
     initialUrl: string
     topNavButtonState: TopNavButtonStateType
     rightPageChat: Partial<IContact> | undefined
+    leftPageSelectedTab: Partial<IContact> | undefined
 }
 
 const initialState: MiscState = {
     initialUrl: '',
     topNavButtonState: 'DEFAULT',
-    rightPageChat: undefined
+    rightPageChat: undefined,
+    leftPageSelectedTab: undefined
 }
 
 export const miscSlice = createSlice({
@@ -35,6 +37,13 @@ export const miscSlice = createSlice({
             action: PayloadAction<Partial<IContact> | undefined>
         ) => {
             state.rightPageChat = action.payload
+        },
+
+        setLeftPageSelectedChat: (
+            state,
+            action: PayloadAction<Partial<IContact> | undefined>
+        ) => {
+            state.leftPageSelectedTab = action.payload
         }
     }
 })

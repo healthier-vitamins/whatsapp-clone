@@ -1,12 +1,14 @@
 import SearchSvg from '../../../svgs/SearchSvg'
 
-export default function CoreSearchBar({
+// TODO this needs refactoring
+// common components to not have background color
+export default function CoreSecondarySearchBar({
     placeholderText
 }: {
     placeholderText?: string
 }) {
     return (
-        <div className="flex h-full w-full bg-white px-4 pb-2 pt-2">
+        <div className="flex h-full max-h-[49px] w-full bg-white px-4 pb-2 pt-2">
             {/* <div className="mx-auto max-w-sm">
                 <h2 className="mb-2 text-lg font-semibold">Card Details</h2>
                 <div className="space-y-2">
@@ -30,10 +32,10 @@ export default function CoreSearchBar({
                 </div>
             </div> */}
             <label className="relative block w-full">
-                <SearchSvg className="text-primary-font-color absolute left-4 top-[10px] h-4 w-4" />
+                <SearchSvg className="absolute left-4 top-[10px] h-4 w-4 text-primary-font-color" />
                 <input
                     placeholder={placeholderText}
-                    className="core-textfield  !pl-12  focus:outline-none  "
+                    className="core-secondary-textfield  !pl-12  focus:outline-none  "
                 ></input>
             </label>
         </div>
