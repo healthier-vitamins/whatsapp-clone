@@ -1,5 +1,6 @@
 import http from 'http'
 import configureExpress from './loaders/express'
+import { Server } from 'socket.io'
 
 require('dotenv').config()
 
@@ -30,13 +31,19 @@ const portList = process.env.PORTS?.split(';;') || []
 const serverInstances = <any>[]
 
 portList.forEach((port) => {
-    const webServer = http.createServer(expressApp)
+    const server = http.createServer(expressApp)
 
-    webServer.listen(parseInt(port), () => {
+    const io = new Server(server)
+
+    // server-side
+    io.on('connection', (socket) => {
+        console.log(socket.id) // x8WIv7-mJelg7on_ALbx
+    })
+
+    server.listen(parseInt(port), () => {
         console.log(`Listening on port ${port}`)
     })
-    serverInstances.push(webServer)
+    serverInstances.push(server)
 })
 
 export { serverInstances }
-

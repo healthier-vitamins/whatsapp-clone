@@ -26,9 +26,9 @@ export default function ContactsContainer() {
 
     // -- Functions
     function renderContacts() {
-        return data?.map((contact) => {
+        return data?.map((contact, index) => {
             return (
-                <>
+                <div key={index}>
                     <CoreTab
                         primaryText={contact.username}
                         secondaryText={contact.status}
@@ -46,7 +46,7 @@ export default function ContactsContainer() {
                         }}
                     />
                     <Divider />
-                </>
+                </div>
             )
         })
     }
@@ -59,7 +59,7 @@ export default function ContactsContainer() {
             <Divider />
 
             <div className=" h-[72px]  bg-white py-[30px] pl-8">
-                <span className="text-primary-background  text-base font-normal">
+                <span className="text-base  font-normal text-primary-background">
                     CONTACTS ON WHATSAPP
                 </span>
             </div>

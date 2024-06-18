@@ -21,7 +21,8 @@
         "helmet": "^7.0.0",
         "http-status-codes": "^2.3.0",
         "jsonwebtoken": "^9.0.2",
-        "mysql2": "^3.6.5"
+        "mysql2": "^3.6.5",
+        "socket.io": "^4.7.5"
     },
     "devDependencies": {
         "@types/compression": "^1.7.4",
@@ -32,5 +33,9 @@
         "prisma": "^5.14.0",
         "ts-node": "^10.9.2",
         "typescript": "^5.4.4"
+    },
+    "optionalDependencies": {
+        "bufferutil": "^4.0.8",
+        "utf-8-validate": "^6.0.4"
     }
 }
