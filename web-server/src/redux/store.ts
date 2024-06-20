@@ -1,7 +1,7 @@
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit'
 import apiAuthentication from '../rtk-query/api/authentication.api'
 import { miscSlice } from './reducers/misc.reducer'
-import apiContacts from '../rtk-query/api/contacts.api'
+import apiContacts from '../rtk-query/api/contact.api'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { authenticationSlice } from './reducers/authentication.reducer'
 

@@ -29,7 +29,7 @@ export default function ChatsContainer() {
 
         return (
             <div className="flex h-full w-full items-center justify-center">
-                <span className="text-secondary-font-color text-sm  font-light">
+                <span className="text-sm font-light  text-secondary-font-color">
                     No chats found :(
                 </span>
             </div>

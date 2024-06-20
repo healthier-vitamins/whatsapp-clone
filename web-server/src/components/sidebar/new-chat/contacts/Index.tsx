@@ -2,7 +2,7 @@ import useChangeTopNavButtonState from '../../../../hooks/common/useChangeTopNav
 import useLogin from '../../../../hooks/login/useLogin'
 import { useAppDispatch } from '../../../../redux/hooks'
 import reducerMisc from '../../../../redux/reducers/misc.reducer'
-import apiContacts from '../../../../rtk-query/api/contacts.api'
+import apiContacts from '../../../../rtk-query/api/contact.api'
 import CoreTab from '../../../common/tab/CoreTab'
 import Divider from '../../Divider'
 import GroupTab from './GroupTab'

@@ -4,21 +4,42 @@ import SmileyIconSvg from '../../svgs/SmileyIconSvg'
 import PlusIconSvg from '../../svgs/PlusIconSvg'
 import CorePrimarySearchBar from '../../components/common/search-bar/CorePrimarySearchBar'
 
-import { io } from 'socket.io-client'
+import { useEffect, useState } from 'react'
+import { socket } from '../../socket/socket'
 
 export default function ChatPage() {
     // -- Redux
     const miscSelector = useAppSelector((state) => state.misc)
 
-    const socket = io()
+    // -- Use States
+    const [textMessage, setTextMessage] = useState('')
 
-    socket.on('connection', (socket) => {
-        console.log('frontend socket: ', socket.id)
-    })
-    // client-side
-    socket.on('connect', () => {
-        console.log(socket.id) // x8WIv7-mJelg7on_ALbx
-    })
+    const [isConnected, setIsConnected] = useState(socket.connected)
+    const [fooEvents, setFooEvents] = useState<any>([])
+
+    useEffect(() => {
+        function onConnect() {
+            setIsConnected(true)
+        }
+
+        function onDisconnect() {
+            setIsConnected(false)
+        }
+
+        function onFooEvent(value: any) {
+            setFooEvents((previous: any) => [...previous, value])
+        }
+
+        socket.on('connect', onConnect)
+        socket.on('disconnect', onDisconnect)
+        socket.on('foo', onFooEvent)
+
+        return () => {
+            socket.off('connect', onConnect)
+            socket.off('disconnect', onDisconnect)
+            socket.off('foo', onFooEvent)
+        }
+    }, [])
 
     return (
         <div className="flex h-full w-full flex-col items-center ">
@@ -37,7 +58,10 @@ export default function ChatPage() {
                     <PlusIconSvg className="cursor-pointer" />
                 </div>
                 <div className="ml-4 flex w-full items-center px-2 py-[5px]">
-                    <CorePrimarySearchBar placeholderText="Type a message" />
+                    <CorePrimarySearchBar
+                        onChange={(value) => setTextMessage(value)}
+                        placeholderText="Type a message"
+                    />
                 </div>
             </div>
         </div>

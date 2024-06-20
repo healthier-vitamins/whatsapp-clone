@@ -1,11 +1,11 @@
-import { IContact } from './../../../../shared/types/responses/contacts/index'
+import { IContact } from '../../../../shared/types/responses/contacts/index'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const apiContacts = createApi({
     reducerPath: 'apiContacts',
     tagTypes: ['Contact'],
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:3001/api/contact'
+        baseUrl: 'http://localhost:8080/api/contact'
     }),
     endpoints: (build) => ({
         getAll: build.query<IContact[], Partial<Pick<IContact, 'id'>>>({
@@ -26,7 +26,7 @@ const apiContacts = createApi({
                 return response.data
             },
             query: (payload) => ({
-                url: `get-all`,
+                url: `get-all-contacts`,
                 method: 'GET',
                 params: payload
             })
