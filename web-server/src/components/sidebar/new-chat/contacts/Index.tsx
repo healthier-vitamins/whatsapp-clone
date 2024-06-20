@@ -22,8 +22,6 @@ export default function ContactsContainer() {
         }
     )
 
-    console.log(data)
-
     // -- Functions
     function renderContacts() {
         return data?.map((contact, index) => {

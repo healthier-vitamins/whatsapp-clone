@@ -29,7 +29,6 @@ export default function LoginPage() {
         removeCookie('token')
     }, [])
 
-    console.log(contactsData)
     // const {
     //     isError,
     //     isLoading,

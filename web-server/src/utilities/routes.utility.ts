@@ -1,5 +1,4 @@
 import OverallLayout from '../components/layout/OverallLayout'
-import WholePageLayout from '../pages/chat/Index'
 import LoginPage from '../pages/login/Index'
 
 export interface IRoute {

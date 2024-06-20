@@ -16,7 +16,6 @@ class AuthenticationService {
     async testUpdate() {
         try {
             const allUsers = await this.prisma.user.findMany()
-            console.log(allUsers)
 
             return allUsers
         } catch (err) {

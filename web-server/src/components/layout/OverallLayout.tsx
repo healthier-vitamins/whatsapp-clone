@@ -1,37 +1,49 @@
-import WhatsappLaptopImg from '../../img/WhatsappLaptopImg'
-import ChatPage from '../../pages/chat/Index'
+import { useEffect, useState } from 'react'
 import { useAppSelector } from '../../redux/hooks'
+import { socket } from '../../socket/socket'
+import RightPanel from '../right-panel/Index'
 import SidebarContainer from '../sidebar/Index'
 
 export default function OverallLayout() {
     // -- Redux
     const miscSelector = useAppSelector((state) => state.misc)
 
-    // -- Function
-    // TODO to be refactored into a component
-    function renderRightPage() {
-        if (miscSelector.rightPageChat) {
-            return <ChatPage />
-        }
-        return (
-            <div className="bg-secondary-background border-l-primary-border-color h-full w-full border-l-[1px]">
-                <div className="flex h-full flex-col items-center justify-center">
-                    <WhatsappLaptopImg />
+    // TODO set this in redux instead
+    const [isConnected, setIsConnected] = useState(socket.connected)
+    const [fooEvents, setFooEvents] = useState<any>([])
 
-                    <span className="mt-4 text-3xl font-normal text-[#41525d]">
-                        Welcome to Whatsapp Web Clone :)
-                    </span>
-                </div>
-            </div>
-        )
-    }
+    useEffect(() => {
+        function onConnect() {
+            setIsConnected(true)
+        }
+
+        function onDisconnect() {
+            setIsConnected(false)
+        }
+
+        function onFooEvent(value: any) {
+            setFooEvents((previous: any) => [...previous, value])
+        }
+
+        socket.on('connect', onConnect)
+        socket.on('disconnect', onDisconnect)
+        socket.on('foo', onFooEvent)
+
+        return () => {
+            socket.off('connect', onConnect)
+            socket.off('disconnect', onDisconnect)
+            socket.off('foo', onFooEvent)
+        }
+    }, [])
+
+    console.log(isConnected)
 
     return (
         <div className="flex h-full w-full">
             <div className="h-full w-full max-w-[450px]">
                 <SidebarContainer />
             </div>
-            {renderRightPage()}
+            <RightPanel />
         </div>
     )
 }

@@ -9,7 +9,6 @@ export default function useDefaultUrl(dependencies = []) {
 
     // -- Use Effects
     useEffect(() => {
-        console.log(location.pathname)
         if (location.pathname === '/') customHistory.push(allRoutes.LOGIN.url)
     }, [location.pathname])
 }

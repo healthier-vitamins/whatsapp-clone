@@ -18,16 +18,16 @@ type LoginReqType = Pick<IContact, 'id' | 'username'>
 
 const apiAuthentication = createApi({
     reducerPath: 'apiAuthentication',
-    tagTypes: ['Login', 'TestUpdate'],
+    tagTypes: ['Login'],
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:3001/api/authentication'
     }),
     endpoints: (build) => ({
         login: build.query<string, LoginReqType>({
             providesTags: (result, error, id) => {
-                console.log('result: ', result)
-                console.log('error: ', error)
-                console.log('id: ', id)
+                // console.log('result: ', result)
+                // console.log('error: ', error)
+                // console.log('id: ', id)
                 return [{ type: 'Login' }]
             },
             // pick out data and prevent nested properties in a hook or selector

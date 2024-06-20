@@ -1,45 +1,40 @@
 import { UserCircleIcon } from '@heroicons/react/24/solid'
-import { useAppSelector } from '../../redux/hooks'
-import SmileyIconSvg from '../../svgs/SmileyIconSvg'
-import PlusIconSvg from '../../svgs/PlusIconSvg'
 import CorePrimarySearchBar from '../../components/common/search-bar/CorePrimarySearchBar'
+import { useAppSelector } from '../../redux/hooks'
+import PlusIconSvg from '../../svgs/PlusIconSvg'
+import SmileyIconSvg from '../../svgs/SmileyIconSvg'
 
 import { useEffect, useState } from 'react'
 import { socket } from '../../socket/socket'
+import ConversationBox from './ConversationBox'
 
-export default function ChatPage() {
+export default function RightPanelChat() {
     // -- Redux
     const miscSelector = useAppSelector((state) => state.misc)
 
     // -- Use States
     const [textMessage, setTextMessage] = useState('')
 
-    const [isConnected, setIsConnected] = useState(socket.connected)
-    const [fooEvents, setFooEvents] = useState<any>([])
-
+    // -- Use Effects
     useEffect(() => {
-        function onConnect() {
-            setIsConnected(true)
+        const handleKeyUp = (e: KeyboardEvent) => {
+            if (e.key === 'Enter' && !!textMessage) {
+                onSubmit()
+            }
         }
 
-        function onDisconnect() {
-            setIsConnected(false)
-        }
-
-        function onFooEvent(value: any) {
-            setFooEvents((previous: any) => [...previous, value])
-        }
-
-        socket.on('connect', onConnect)
-        socket.on('disconnect', onDisconnect)
-        socket.on('foo', onFooEvent)
-
+        window.addEventListener('keyup', handleKeyUp)
         return () => {
-            socket.off('connect', onConnect)
-            socket.off('disconnect', onDisconnect)
-            socket.off('foo', onFooEvent)
+            window.removeEventListener('keyup', handleKeyUp)
         }
-    }, [])
+    }, [textMessage])
+
+    // -- Functions
+    function onSubmit() {
+        console.log('submitted')
+        socket.emit('daniel', textMessage)
+        setTextMessage('')
+    }
 
     return (
         <div className="flex h-full w-full flex-col items-center ">
@@ -49,7 +44,9 @@ export default function ChatPage() {
                     {miscSelector.rightPageChat?.username}
                 </div>
             </div>
-            <div className="w-full flex-grow bg-chat-background-img bg-contain  "></div>
+            <div className="w-full flex-grow">
+                <ConversationBox />
+            </div>
             <div className="flex h-[62px] w-full items-center bg-primary-header-background px-4 py-[5px]">
                 <div className="px-3">
                     <SmileyIconSvg className="cursor-pointer" />
@@ -59,6 +56,7 @@ export default function ChatPage() {
                 </div>
                 <div className="ml-4 flex w-full items-center px-2 py-[5px]">
                     <CorePrimarySearchBar
+                        value={textMessage}
                         onChange={(value) => setTextMessage(value)}
                         placeholderText="Type a message"
                     />
