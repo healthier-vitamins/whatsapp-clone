@@ -1,5 +1,5 @@
-import { IContact } from '../../../../shared/types/responses/contacts/index'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IContact } from '../../../../shared/types/prisma'
 
 const apiContacts = createApi({
     reducerPath: 'apiContacts',

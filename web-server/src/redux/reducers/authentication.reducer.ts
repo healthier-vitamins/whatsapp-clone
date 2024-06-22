@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { RootState } from '../store'
-import { IContact } from '../../../../shared/types/responses/contacts'
+import { IContact } from '../../../../shared/types/prisma'
 
 interface AuthenticationState {
     loggedInUser: IContact | undefined

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
-import { IContact } from '../../../../shared/types/responses/contacts'
+import { IContact } from '../../../../shared/types/prisma'
 import customHistory from '../../components/router/CustomHistory'
 import allRoutes from '../../utilities/routes.utility'
 
@@ -10,6 +10,7 @@ export default function useLogin() {
 
     // -- Use Effect
     useEffect(() => {
+        // whatsapp only has 1 url
         if (cookies.token) customHistory.push(allRoutes.CHATS.url)
     }, [cookies.token])
 

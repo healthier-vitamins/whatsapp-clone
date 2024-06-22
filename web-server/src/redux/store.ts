@@ -4,18 +4,21 @@ import { miscSlice } from './reducers/misc.reducer'
 import apiContacts from '../rtk-query/api/contact.api'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { authenticationSlice } from './reducers/authentication.reducer'
+import apiChat from '../rtk-query/api/chat.api'
 
 const store = configureStore({
     reducer: {
         misc: miscSlice.reducer,
         authentication: authenticationSlice.reducer,
         [apiAuthentication.reducerPath]: apiAuthentication.reducer,
-        [apiContacts.reducerPath]: apiContacts.reducer
+        [apiContacts.reducerPath]: apiContacts.reducer,
+        [apiChat.reducerPath]: apiChat.reducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
             .concat(apiAuthentication.middleware)
             .concat(apiContacts.middleware)
+            .concat(apiChat.middleware)
 })
 export default store
 

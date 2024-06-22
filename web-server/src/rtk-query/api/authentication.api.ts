@@ -1,6 +1,6 @@
 // Need to use the React-specific entry point to allow generating React hooks
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IContact } from '../../../../shared/types/responses/contacts'
+import { IContact } from '../../../../shared/types/prisma'
 
 type LoginReqType = Pick<IContact, 'id' | 'username'>
 

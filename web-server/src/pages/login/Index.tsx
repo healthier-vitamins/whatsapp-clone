@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { IContact } from '../../../../shared/types/responses/contacts'
 import CoreTextDropdown from '../../components/common/select/CoreTextDropdown'
 import useLogin from '../../hooks/login/useLogin'
 import apiContacts from '../../rtk-query/api/contact.api'
 import TopHeader from './TopHeader'
 import CorePrimaryButton from '../../components/common/button/CorePrimaryButton'
 import { useCookies } from 'react-cookie'
+import { IContact } from '../../../../shared/types/prisma'
 
 export default function LoginPage() {
     // -- Use States

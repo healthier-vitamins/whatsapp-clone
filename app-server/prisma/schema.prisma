@@ -13,7 +13,7 @@ model Chat {
   id              String            @id @default(uuid())
   creationDate    DateTime          @default(now())
   message         Message[]
-  userChatMapping Userchatmapping[]
+  // userChatMapping UserChatMapping[]
 }
 
 model Contact {
@@ -47,15 +47,15 @@ model User {
   status          String?
   contact         Contact?
   message         Message?
-  userChatMapping Userchatmapping[]
+  // userChatMapping UserChatMapping[]
 }
 
-model Userchatmapping {
-  userId String
-  chatId String
-  chat   Chat   @relation(fields: [chatId], references: [id], map: "UserChatMapping_chatId_fkey")
-  user   User   @relation(fields: [userId], references: [id], map: "UserChatMapping_userId_fkey")
+// model UserChatMapping {
+//   userId String
+//   chatId String
+//   chat   Chat   @relation(fields: [chatId], references: [id], map: "UserChatMapping_chatId_fkey")
+//   user   User   @relation(fields: [userId], references: [id], map: "UserChatMapping_userId_fkey")
 
-  @@id([userId, chatId])
-  @@index([chatId], map: "UserChatMapping_chatId_fkey")
-}
+//   @@id([userId, chatId])
+//   @@index([chatId], map: "UserChatMapping_chatId_fkey")
+// }

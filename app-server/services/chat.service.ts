@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client'
-import ErrorResponse from '../utilities/ErrorResponse'
 import { StatusCodes } from 'http-status-codes'
+import ErrorResponse from '../utilities/ErrorResponse'
+import { to } from '../utilities/promise'
+import { GetChatRequestParams } from './../../shared/types/requests/chat/index'
 
 class ChatService {
     private prisma: PrismaClient
@@ -9,29 +11,39 @@ class ChatService {
         this.prisma = new PrismaClient()
     }
 
-    async getContact(loggedInId: string, selectedUserId: string) {
-        return this.prisma.chat.findUnique({
-            where: {
-                id: '',
-                userChatMapping: {
-                    some: {
-                        userId: {
-                            in: [loggedInId, selectedUserId]
+    async getChat({ loggedInId, selectedUserId }: GetChatRequestParams) {
+        const [existingChatErr, existingChatRes] = await to(
+            this.prisma.chat.findFirst({
+                where: {
+                    message: {
+                        every: {
+                            user: {
+                                id: {
+                                    in: [loggedInId, selectedUserId]
+                                }
+                            }
                         }
                     }
+                },
+                select: {
+                    id: true,
+                    message: true
                 }
-            }
-        })
-        // .findMany({ where: { id: { not: loggedInId } } })
-        // .then((res) => res)
-        // .catch((err) => {
-        //     console.log(err)
-        //     throw new ErrorResponse(
-        //         StatusCodes.INTERNAL_SERVER_ERROR,
-        //         'Something went wrong fetching users.'
-        //     )
-        // })
-        // .finally(async () => await this.prisma.$disconnect())
+            })
+        )
+
+        if (existingChatErr) {
+            console.log(existingChatErr)
+            throw new ErrorResponse(
+                StatusCodes.INTERNAL_SERVER_ERROR,
+                'Something went wrong fetching users.'
+            )
+        }
+        if (!existingChatRes) {
+            //todo create and return newly created chat
+        }
+
+        return existingChatRes
     }
 }
 

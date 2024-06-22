@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { IChat, IContact } from '../../../../shared/types/prisma'
 import { RootState } from '../store'
-import { IContact } from '../../../../shared/types/responses/contacts'
 
 export type TopNavButtonStateType = 'NEW_CHAT' | 'DEFAULT'
 
@@ -32,14 +32,14 @@ export const miscSlice = createSlice({
         ) => {
             state.topNavButtonState = action.payload
         },
-        setRightPageChat: (
+        setRightPanelChat: (
             state,
-            action: PayloadAction<Partial<IContact> | undefined>
+            action: PayloadAction<Partial<IChat & IContact> | undefined>
         ) => {
             state.rightPageChat = action.payload
         },
 
-        setLeftPageSelectedChat: (
+        setLeftPanelSelectedTab: (
             state,
             action: PayloadAction<Partial<IContact> | undefined>
         ) => {
