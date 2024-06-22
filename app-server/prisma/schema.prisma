@@ -1,5 +1,7 @@
+// https://www.prisma.io/docs/orm/prisma-client/queries/relation-queries#nested-reads
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
@@ -11,7 +13,7 @@ model Chat {
   id              String            @id @default(uuid())
   creationDate    DateTime          @default(now())
   message         Message[]
-  userchatmapping Userchatmapping[]
+  userChatMapping Userchatmapping[]
 }
 
 model Contact {
@@ -45,7 +47,7 @@ model User {
   status          String?
   contact         Contact?
   message         Message?
-  userchatmapping Userchatmapping[]
+  userChatMapping Userchatmapping[]
 }
 
 model Userchatmapping {
