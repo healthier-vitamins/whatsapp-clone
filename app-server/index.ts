@@ -44,18 +44,31 @@ portList.forEach((port) => {
     io.on('connection', (socket) => {
         console.log(socket.id) // x8WIv7-mJelg7on_ALbx
         socket.on('connection', (message) => {
-            console.log('message: ', message)
+            console.log('connection message: ', message)
             io.emit(message)
         })
 
         socket.on('connect', () => {
-            io.emit('connected', 'successfully connected')
+            console.log('connected')
+            // io.emit('connected', 'successfully connected')
         })
 
-        socket.on('daniel', (message) => {
-            console.log("daniel's ", message)
-            io.emit('daniel', message)
+        socket.on('joinRoom', (chatId, callback) => {
+            console.log('chat id : ', chatId)
+            socket.join(chatId)
+            callback(`user ${socket.id} joined room ${chatId}`)
+            console.log('rooms: ', socket.rooms)
         })
+
+        socket.on('sendMessage', async ({ text, chatId, userId }, callback) => {
+            io.to(chatId).emit(text)
+            callback('message received and saved')
+        })
+
+        // socket.on('daniel', (message, callback) => {
+        //     console.log("daniel's ", message)
+        //     callback('got it')
+        // })
 
         socket.on('disconnect', () => {
             console.log('user disconnected')

@@ -6,37 +6,37 @@ import SidebarContainer from '../sidebar/Index'
 
 export default function OverallLayout() {
     // -- Redux
-    const miscSelector = useAppSelector((state) => state.misc)
+    // const miscSelector = useAppSelector((state) => state.misc)
 
     // TODO set this in redux instead
     const [isConnected, setIsConnected] = useState(socket.connected)
-    const [fooEvents, setFooEvents] = useState<any>([])
+    // const [fooEvents, setFooEvents] = useState<any>([])
 
     useEffect(() => {
         function onConnect() {
+            console.log('connected')
             setIsConnected(true)
         }
 
         function onDisconnect() {
+            console.log('disconnected')
             setIsConnected(false)
         }
 
-        function onFooEvent(value: any) {
-            setFooEvents((previous: any) => [...previous, value])
-        }
+        // function onFooEvent(value: any) {
+        //     setFooEvents((previous: any) => [...previous, value])
+        // }
 
         socket.on('connect', onConnect)
         socket.on('disconnect', onDisconnect)
-        socket.on('foo', onFooEvent)
+        // socket.on('foo', onFooEvent)
 
         return () => {
             socket.off('connect', onConnect)
             socket.off('disconnect', onDisconnect)
-            socket.off('foo', onFooEvent)
+            // socket.off('foo', onFooEvent)
         }
     }, [])
-
-    console.log(isConnected)
 
     return (
         <div className="flex h-full w-full">

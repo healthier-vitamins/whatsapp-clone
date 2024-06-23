@@ -16,14 +16,14 @@ const apiContacts = createApi({
                 return [{ type: 'AllContact' }]
             },
             // pick out data and prevent nested properties in a hook or selector
-            transformResponse: (response: { data: IContact[] }, meta, arg) => {
+            transformResponse: (response: IContact[], meta, arg) => {
                 // console.log('res: ', response)
-                return response.data
+                return response
             },
             // pick out errors and prevent nested properties in a hook or selector
             transformErrorResponse: (response, meta, arg) => {
                 // console.log('error res: ', response)
-                return response.data
+                return response
             },
             query: (payload) => ({
                 url: `get-all-contacts`,

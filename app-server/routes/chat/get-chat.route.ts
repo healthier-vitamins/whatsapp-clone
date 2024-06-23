@@ -12,10 +12,12 @@ router.get(
         try {
             const loggedInId = req.query.loggedInId
             const selectedUserId = req.query.selectedUserId
+
             const chat = await chatService.getChat({
                 loggedInId: String(loggedInId),
                 selectedUserId: String(selectedUserId)
             })
+
             res.json(httpResponse(chat)).status(StatusCodes.OK)
         } catch (err) {
             next(err)

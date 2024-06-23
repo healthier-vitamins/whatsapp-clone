@@ -1,5 +1,4 @@
 import { useAppSelector } from '../../../redux/hooks'
-import LockSvg from '../../../svgs/LockSvg'
 import CoreTab from '../../common/tab/CoreTab'
 import Divider from '../Divider'
 import NotEncryptedFooter from '../NotEncryptedFooter'
@@ -12,12 +11,12 @@ export default function ChatsContainer() {
     // -- Function
 
     function renderChatSidebar() {
-        if (miscSelector.leftPageSelectedTab) {
+        if (miscSelector.leftPanelSelectedTab) {
             return (
                 <>
                     <CoreTab
-                        option={miscSelector.leftPageSelectedTab}
-                        primaryText={miscSelector.leftPageSelectedTab.username}
+                        option={miscSelector.leftPanelSelectedTab}
+                        primaryText={miscSelector.leftPanelSelectedTab.username}
                         isSelected={true}
                     />
                     <Divider />

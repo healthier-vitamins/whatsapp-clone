@@ -6,7 +6,7 @@ export default function RightPanel() {
     // -- Redux
     const miscSelector = useAppSelector((state) => state.misc)
 
-    if (miscSelector.rightPageChat) {
+    if (miscSelector.rightPanelChat.user && miscSelector.rightPanelChat.chat) {
         return <RightPanelChat />
     }
     return (

@@ -12,11 +12,9 @@ import GroupTab from './GroupTab'
 import { GetChatRequestParams } from '../../../../../../shared/types/requests/chat'
 import miscConstant from '../../../../globals/misc.constant'
 import { to } from '../../../../../../app-server/utilities/promise'
+import { socket } from '../../../../socket/socket'
 
 export default function ContactsContainer() {
-    // -- Use States
-    const [chatQueryParam, setChatQueryParam] = useState<GetChatRequestParams>()
-
     // -- Redux
     const dispatch = useAppDispatch()
 
@@ -24,7 +22,7 @@ export default function ContactsContainer() {
     const { loggedInUser } = useLogin()
     const changeTopNavButton = useChangeTopNavButtonState()
 
-    const { data, error } = apiContacts.useGetAllQuery(
+    const { data: allUserData, error: allUserErr } = apiContacts.useGetAllQuery(
         { id: loggedInUser?.id },
         {
             pollingInterval: miscConstant.REFETCH_POLLING
@@ -38,27 +36,40 @@ export default function ContactsContainer() {
 
     // -- Functions
     async function handleClick(selectedOption: IContact) {
-        const [err, data] = await to(
+        const [chatErr, chatRes] = await to(
             trigger({
                 loggedInId: loggedInUser.id,
                 selectedUserId: selectedOption.id
             } as GetChatRequestParams)
         )
 
-        if (err || !data?.data) {
+        if (chatErr || !chatRes?.data) {
+            console.log('chatRes?.data: ', chatRes?.data)
             window.alert('Something went wrong getting chat')
-            console.error(err)
+            console.warn(chatErr)
             return
         }
 
-        dispatch(reducerMisc.setRightPanelChat(data.data))
-        dispatch(reducerMisc.setLeftPanelSelectedTab(selectedOption))
-        changeTopNavButton.onClick('DEFAULT')
+        socket.emit('joinRoom', chatRes.data.id, (response: string) => {
+            console.log(response)
+
+            if (response) {
+                dispatch(
+                    reducerMisc.setRightPanelChat({
+                        chat: chatRes.data,
+                        user: selectedOption
+                    })
+                )
+
+                dispatch(reducerMisc.setLeftPanelSelectedTab(selectedOption))
+                changeTopNavButton.onClick('DEFAULT')
+            }
+        })
     }
 
     // -- Functions
     function renderContacts() {
-        return data?.map((contact, index) => {
+        return allUserData?.map((contact, index) => {
             return (
                 <div key={index}>
                     <CoreTab

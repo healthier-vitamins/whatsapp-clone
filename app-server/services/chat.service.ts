@@ -12,22 +12,25 @@ class ChatService {
     }
 
     async getChat({ loggedInId, selectedUserId }: GetChatRequestParams) {
+        let chatId = undefined
+
         const [existingChatErr, existingChatRes] = await to(
-            this.prisma.chat.findFirst({
+            this.prisma.existing_chats.findFirst({
                 where: {
-                    message: {
-                        every: {
-                            user: {
-                                id: {
-                                    in: [loggedInId, selectedUserId]
-                                }
+                    OR: [
+                        {
+                            AND: {
+                                firstUser: { equals: loggedInId },
+                                secondUser: { equals: selectedUserId }
+                            }
+                        },
+                        {
+                            AND: {
+                                secondUser: { equals: loggedInId },
+                                firstUser: { equals: selectedUserId }
                             }
                         }
-                    }
-                },
-                select: {
-                    id: true,
-                    message: true
+                    ]
                 }
             })
         )
@@ -39,11 +42,71 @@ class ChatService {
                 'Something went wrong fetching users.'
             )
         }
+
         if (!existingChatRes) {
-            //todo create and return newly created chat
+            const [newChatErr, newChatRes] = await to(
+                this.prisma.chat.create({
+                    data: {
+                        userChatMapping: {
+                            // connect: [{ user: { id: selectedUserId } }]
+                            create: [
+                                {
+                                    user: {
+                                        connect: { id: loggedInId }
+                                    }
+                                },
+                                {
+                                    user: {
+                                        connect: { id: selectedUserId }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    select: {
+                        userChatMapping: true,
+                        message: true
+                    }
+                })
+            )
+
+            if (newChatErr || !newChatRes) {
+                console.log(newChatErr)
+                throw new ErrorResponse(
+                    StatusCodes.INTERNAL_SERVER_ERROR,
+                    'Something went wrong with creating new chat.'
+                )
+            }
+
+            chatId = newChatRes.userChatMapping[0].chatId
+        } else {
+            chatId = existingChatRes.chatId
         }
 
-        return existingChatRes
+        const [chatErr, chatRes] = await to(
+            this.prisma.chat.findUnique({
+                where: {
+                    id: chatId
+                },
+                include: {
+                    message: true
+                    // userChatMapping: {
+                    //     include: {
+                    //         user: true
+                    //     }
+                    // }
+                }
+            })
+        )
+
+        if (chatErr) {
+            throw new ErrorResponse(
+                StatusCodes.INTERNAL_SERVER_ERROR,
+                'Something went wrong getting chat.'
+            )
+        }
+
+        return chatRes
     }
 }
 

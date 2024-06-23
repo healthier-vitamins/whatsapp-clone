@@ -14,7 +14,6 @@ class ContactService {
             .findMany({ where: { id: { not: loggedInId } } })
             .then((res) => res)
             .catch((err) => {
-                console.log(err)
                 throw new ErrorResponse(
                     StatusCodes.INTERNAL_SERVER_ERROR,
                     'Something went wrong fetching users.'

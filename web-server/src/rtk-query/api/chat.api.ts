@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { GetChatRequestParams } from '../../../../shared/types/requests/chat'
-import { IChat, IContact } from './../../../../shared/types/prisma/index'
+import { IChat } from './../../../../shared/types/prisma/index'
 
 const apiChat = createApi({
     reducerPath: 'apiChat',
@@ -9,30 +9,25 @@ const apiChat = createApi({
         baseUrl: 'http://localhost:8080/api/chat'
     }),
     endpoints: (build) => ({
-        getChat: build.query<
-            Partial<IContact & IChat> | undefined | null,
-            GetChatRequestParams
-        >({
+        getChat: build.query<Partial<IChat> | undefined, GetChatRequestParams>({
             providesTags: (result, error, id) => {
-                console.log('result: ', result)
-                console.log('error: ', error)
-                console.log('id: ', id)
+                // console.log('result: ', result)
+                // console.log('error: ', error)
+                // console.log('id: ', id)
 
                 return [{ type: 'GetChat' }]
             },
             // pick out data and prevent nested properties in a hook or selector
             transformResponse: (
-                response: {
-                    data: Partial<IContact & IChat> | undefined | null
-                },
+                response: Partial<IChat> | undefined,
                 meta,
                 arg
             ) => {
-                return response.data
+                return response
             },
             // pick out errors and prevent nested properties in a hook or selector
             transformErrorResponse: (response, meta, arg) => {
-                return response.data
+                return response
             },
             query: (payload) => ({
                 url: `get-chat`,

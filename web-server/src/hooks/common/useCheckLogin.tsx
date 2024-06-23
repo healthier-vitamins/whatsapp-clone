@@ -17,6 +17,6 @@ export default function useCheckLogin() {
     }, [
         cookies.token,
         miscSelector.topNavButtonState,
-        miscSelector.rightPageChat
+        miscSelector.rightPanelChat
     ])
 }

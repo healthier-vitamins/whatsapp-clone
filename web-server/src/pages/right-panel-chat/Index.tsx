@@ -31,8 +31,28 @@ export default function RightPanelChat() {
 
     // -- Functions
     function onSubmit() {
-        console.log('submitted')
-        socket.emit('daniel', textMessage)
+        if (
+            !miscSelector.rightPanelChat.chat?.id ||
+            !miscSelector.rightPanelChat.user?.id
+        ) {
+            window.alert('Missing chat id to send text.')
+            return
+        }
+
+        socket.emit(
+            'sendMessage',
+            {
+                text: textMessage,
+                chatId: miscSelector.rightPanelChat.chat.id,
+                userId: miscSelector.rightPanelChat.user.id
+            },
+            (response: any) => {
+                console.log('message sent ', response)
+            }
+        )
+        // socket.emit('daniel', textMessage, (response: any) => {
+        //     console.log('res ', response)
+        // })
         setTextMessage('')
     }
 
@@ -41,7 +61,7 @@ export default function RightPanelChat() {
             <div className="flex h-[59px] w-full border-l-[1px] border-l-[rgb(209,215,219)] bg-primary-header-background px-4 py-[10px]">
                 <UserCircleIcon className="  mr-[15px] h-10 w-10 text-gray-300" />
                 <div className="flex h-full w-full items-center text-primary-font-color">
-                    {miscSelector.rightPageChat?.username}
+                    {miscSelector.rightPanelChat?.user?.username}
                 </div>
             </div>
             <div className="w-full flex-grow">

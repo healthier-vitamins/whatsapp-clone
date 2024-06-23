@@ -1,5 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express'
 import contactService from '../../services/contact.service'
+import httpResponse from '../../utilities/httpResponse'
+import { StatusCodes } from 'http-status-codes'
 const router = express.Router()
 
 router.get(
@@ -10,7 +12,7 @@ router.get(
 
         try {
             const data = await contactService.getAll(loggedInId || '')
-            res.json({ data: data })
+            res.json(httpResponse(data)).status(StatusCodes.OK)
         } catch (err) {
             next(err)
         }

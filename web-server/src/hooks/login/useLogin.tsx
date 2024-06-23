@@ -16,7 +16,7 @@ export default function useLogin() {
 
     // -- Functions
     function onClick(selectedUser: IContact | undefined) {
-        setCookie('token', selectedUser)
+        if (selectedUser) setCookie('token', selectedUser)
     }
 
     return {

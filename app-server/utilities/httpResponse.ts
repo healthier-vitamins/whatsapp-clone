@@ -2,6 +2,7 @@ import { Prisma } from '@prisma/client'
 import ErrorResponse from './ErrorResponse'
 
 export default function <T, K>(res: T, err?: K) {
+    // mostly not needed due to express middleware set up
     if (err) {
         if (err instanceof ErrorResponse) {
             return {
@@ -28,15 +29,11 @@ export default function <T, K>(res: T, err?: K) {
 
     if (res) {
         if (typeof res == 'object' && 'data' in res) {
-            return { data: res.data }
+            return res.data
         }
 
-        return {
-            data: res
-        }
+        return res
     }
 
-    return {
-        data: null
-    }
+    return null
 }

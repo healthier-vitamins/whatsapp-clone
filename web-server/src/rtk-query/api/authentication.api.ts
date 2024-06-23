@@ -31,13 +31,13 @@ const apiAuthentication = createApi({
                 return [{ type: 'Login' }]
             },
             // pick out data and prevent nested properties in a hook or selector
-            transformResponse: (response: { data: string }, meta, arg) => {
-                return response.data
+            transformResponse: (response: string, meta, arg) => {
+                return response
             },
             // pick out errors and prevent nested properties in a hook or selector
             transformErrorResponse: (response, meta, arg) => {
-                console.log(response)
-                return response.data
+                // console.log(response)
+                return response
             },
             // // trigger side effects or optimistic updates
             // onQueryStarted(

@@ -1,7 +1,6 @@
-// https://www.prisma.io/docs/orm/prisma-client/queries/relation-queries#nested-reads
 generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["relationJoins"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["views", "relationJoins"]
 }
 
 datasource db {
@@ -13,12 +12,12 @@ model Chat {
   id              String            @id @default(uuid())
   creationDate    DateTime          @default(now())
   message         Message[]
-  // userChatMapping UserChatMapping[]
+  userChatMapping UserChatMapping[]
 }
 
 model Contact {
   id            String  @id @default(uuid())
-  userId        String  @unique(map: "Contact_userId_key")
+  userId        String  @unique
   nickname      String?
   blockedStatus Boolean @default(false)
   user          User    @relation(fields: [userId], references: [id], map: "Contact_userId_fkey")
@@ -27,7 +26,7 @@ model Contact {
 model Message {
   id          String   @id @default(uuid())
   chatId      String
-  senderId    String   @unique(map: "Message_senderId_key")
+  senderId    String   @unique
   text        String
   type        String   @default("text")
   timestamp   DateTime @default(now())
@@ -40,22 +39,30 @@ model Message {
 
 model User {
   id              String            @id @default(uuid())
-  username        String            @unique(map: "User_username_key")
+  username        String            @unique
   passwordHash    String
-  phoneNumber     String            @unique(map: "User_phoneNumber_key")
+  phoneNumber     String            @unique
   lastSeen        DateTime?
   status          String?
   contact         Contact?
   message         Message?
-  // userChatMapping UserChatMapping[]
+  userChatMapping UserChatMapping[]
 }
 
-// model UserChatMapping {
-//   userId String
-//   chatId String
-//   chat   Chat   @relation(fields: [chatId], references: [id], map: "UserChatMapping_chatId_fkey")
-//   user   User   @relation(fields: [userId], references: [id], map: "UserChatMapping_userId_fkey")
+model UserChatMapping {
+  userId String
+  chatId String
+  chat   Chat   @relation(fields: [chatId], references: [id], map: "UserChatMapping_chatId_fkey")
+  user   User   @relation(fields: [userId], references: [id], map: "UserChatMapping_userId_fkey")
 
-//   @@id([userId, chatId])
-//   @@index([chatId], map: "UserChatMapping_chatId_fkey")
-// }
+  @@id([userId, chatId])
+  @@index([chatId], map: "UserChatMapping_chatId_fkey")
+}
+
+// https://stackoverflow.com/questions/23263698/mysql-case-sensitive-view-name
+view existing_chats {
+  firstUser  String @unique
+  chatId     String 
+  secondUser String @unique
+
+}

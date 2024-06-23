@@ -19,7 +19,6 @@ class AuthenticationService {
 
             return allUsers
         } catch (err) {
-            console.log('err: ', err)
             throw new ErrorResponse(
                 StatusCodes.IM_A_TEAPOT,
                 "I'm a little teapot, short and stout."

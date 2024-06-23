@@ -7,15 +7,21 @@ export type TopNavButtonStateType = 'NEW_CHAT' | 'DEFAULT'
 interface MiscState {
     initialUrl: string
     topNavButtonState: TopNavButtonStateType
-    rightPageChat: Partial<IContact> | undefined
-    leftPageSelectedTab: Partial<IContact> | undefined
+    rightPanelChat: {
+        user: Partial<IContact> | undefined
+        chat: Partial<IChat> | undefined
+    }
+    leftPanelSelectedTab: Partial<IContact> | undefined
 }
 
 const initialState: MiscState = {
     initialUrl: '',
     topNavButtonState: 'DEFAULT',
-    rightPageChat: undefined,
-    leftPageSelectedTab: undefined
+    rightPanelChat: {
+        chat: undefined,
+        user: undefined
+    },
+    leftPanelSelectedTab: undefined
 }
 
 export const miscSlice = createSlice({
@@ -28,22 +34,22 @@ export const miscSlice = createSlice({
         },
         setTopNavButton: (
             state,
-            action: PayloadAction<TopNavButtonStateType>
+            action: PayloadAction<MiscState['topNavButtonState']>
         ) => {
             state.topNavButtonState = action.payload
         },
         setRightPanelChat: (
             state,
-            action: PayloadAction<Partial<IChat & IContact> | undefined>
+            action: PayloadAction<MiscState['rightPanelChat']>
         ) => {
-            state.rightPageChat = action.payload
+            state.rightPanelChat = action.payload
         },
 
         setLeftPanelSelectedTab: (
             state,
-            action: PayloadAction<Partial<IContact> | undefined>
+            action: PayloadAction<MiscState['leftPanelSelectedTab']>
         ) => {
-            state.leftPageSelectedTab = action.payload
+            state.leftPanelSelectedTab = action.payload
         }
     }
 })
