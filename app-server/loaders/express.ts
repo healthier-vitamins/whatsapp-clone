@@ -32,6 +32,20 @@ function configureExpress() {
 
     setupRoutes(app)
 
+    // if (isProduction()) {
+    //     // Serve static files from the React app
+    //     app.use(
+    //         express.static(path.join(__dirname, '..', 'web-server', 'dist'))
+    //     )
+
+    //     // The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
+    //     app.get('*', (req, res) => {
+    //         res.sendFile(
+    //             path.join(__dirname, '..', 'web-server', 'dist', 'index.html')
+    //         )
+    //     })
+    // }
+
     // middleware to handle errors thrown anywhere in the application
     app.use(handleErrors)
 

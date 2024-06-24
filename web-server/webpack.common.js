@@ -47,6 +47,9 @@ module.exports = {
     optimization: {
         // tree shaking
         usedExports: true
+
+        // // runtime chunk
+        // runtimeChunk: 'single'
     },
     module: {
         rules: [
